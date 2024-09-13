@@ -1,0 +1,268 @@
+<section class="registration-container">
+  <div class="container-fluid" class="registration-form">
+    <div class="card h-100">
+      <form #realtorForm="ngForm"  (ngSubmit)="onSubmit(realtorForm)">
+        <div class="card-body">
+          <div class="row gutters">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+              <h6 class="mb-2 text-primary">Realtor Registration</h6>
+            </div>
+
+            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 mb-3">
+              <div class="form-group">
+                <label for="userType">User Type</label>
+                <select
+                 
+                  id="userType"
+                  name="userType"
+                  class="form-control form-select"
+                  [(ngModel)]="model.userType"
+                  required
+                  #userType="ngModel"
+                  (change)="onUserTypeChange($event)"
+                >
+                  <option value="" disabled selected>Select User Type</option>
+                  <option value="freelancer">Freelancer</option>
+                  <option value="company">Company</option>
+                </select>
+                <div
+                *ngIf="userType.invalid && (userType.dirty || userType.touched)"
+                class="alert-danger"
+              >
+                <div *ngIf="userType.errors?.['required']">User Type is required.</div>
+              </div>
+              </div>
+            </div>
+            
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 mb-3">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input
+                  type="text"
+                  id="RealtorName"
+                  name="RealtorName"
+                  class="form-control"
+                  [(ngModel)]="model.RealtorName"
+                  required
+                  pattern="[a-zA-Z ]*"
+                  minlength="3"
+                  #name="ngModel"
+                  ngModel
+                />
+                <div
+                  *ngIf="name.invalid && (name.dirty || name.touched)"
+                  class="alert-danger"
+                >
+                  <div *ngIf="name.errors?.['required']">Name is required.</div>
+                  <div *ngIf="name.errors?.['minlength']">
+                    Name must be at least 3 characters long.
+                  </div>
+                  <div *ngIf="name.errors?.['pattern']">
+                    Numbers not Allowed
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+              <div class="form-group">
+                <label for="contact">Contact Number</label>
+                <input
+                  type="tel"
+                  id="ContactNo"
+                  name="ContactNo"
+                  class="form-control"
+                  [(ngModel)]="model.ContactNo"
+                  mask="0000-0000000"
+                  required
+                  #contact="ngModel"
+                />
+                <div
+                *ngIf="contact.invalid && (contact.dirty || contact.touched)"
+                class="alert-danger"
+              >
+              <div *ngIf="contact.errors?.['required']">Contact Number is required.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 mb-3">
+              <div class="form-group">
+                <label for="cnic">CNIC</label>
+                <input
+                  type="text"
+                  id="cnic"
+                  name="cnic"
+                  class="form-control"
+                  [(ngModel)]="model.cnic"
+                  required
+                  mask="00000-0000000-0"
+                  #cnic="ngModel"
+                />
+                <div
+                  *ngIf="cnic.invalid && (cnic.dirty || cnic.touched)"
+                  class="alert-danger"
+                >
+                <div *ngIf="cnic.errors?.['required']">CNIC is required.</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 mb-3">
+              <div class="form-group">
+                <label for="officeAddress">Office Address</label>
+                <input
+                  type="text"
+                  id="officeAddress"
+                  name="officeAddress"
+                  class="form-control"
+                  [(ngModel)]="model.officeAddress"
+                  required
+                  #officeAddress="ngModel"
+                />
+                <div
+                *ngIf="officeAddress.invalid && (officeAddress.dirty || officeAddress.touched)"
+                class="alert-danger"
+              >
+                <div *ngIf="officeAddress.errors?.['required']">Office Address is required.</div>
+              </div>
+              </div>
+            </div>
+
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 mb-3">
+              <div class="form-group">
+                <label for="companyName">Company Name</label>
+                <input
+                  type="text"
+                  id="companyName"
+                  name="companyName"
+                  class="form-control"
+                  [(ngModel)]="model.companyName"
+                  required
+                  #companyName="ngModel"
+                />
+
+                <div
+                *ngIf="companyName.invalid && (companyName.dirty || companyName.touched)"
+                class="alert-danger"
+              >
+                <div *ngIf="companyName.errors?.['required']">Company Name is required.</div>
+              </div>
+              </div>
+            </div>
+
+            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 mb-3">
+              <div class="form-group">
+                <label for="city">City</label>
+                <input
+                  type="text"
+                  id="city"
+                  name="city"
+                  class="form-control"
+                  [(ngModel)]="model.city"
+                  required
+                  #city="ngModel"
+                />
+                <div
+                *ngIf="city.invalid && (city.dirty || city.touched)"
+                class="alert-danger"
+              >
+                <div *ngIf="city.errors?.['required']">City is required.</div>
+              </div>
+              </div>
+            </div>
+
+            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 mb-3">
+              <div class="form-group">
+                <label for="mgcAgent">MGC Agent</label>
+                <select
+                  class="form-control"
+                  id="mgcAgent"
+                  class="form-control form-select"
+                  [(ngModel)]="model.AgentId"
+                  name="mgcAgent"
+                 #mgcAgent="ngModel"
+                >
+                  <option value="" disabled selected>Select MGC Agent</option>
+                  <option *ngFor="let partner of businessPartners" [value]="partner.businessPartnersCode">
+                    {{ partner.businessPartnersName }}
+                  </option>
+                </select>
+                <div
+                  *ngIf="mgcAgent.invalid &&  (mgcAgent.dirty || mgcAgent.touched)"
+                  class="alert-danger"
+                >
+                  <div *ngIf="mgcAgent.errors?.['required']">MGC Agent is required.</div>
+                </div>
+              </div>
+            </div>
+
+
+           
+
+            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 mb-3">
+              <div class="form-group">
+                <label for="cnicPhoto">CNIC Photo</label>
+                <input
+                  type="file"
+                  id="CnicImage"
+                  name="CnicImage"
+                  class="form-control"
+                  (change)="onFileChange($event, 'CnicImage')"
+                  required
+                  #cnicPhoto="ngModel"
+                  [(ngModel)]="model.cnicPhoto"
+                />
+                <div
+                *ngIf="cnicPhoto.invalid && (cnicPhoto.dirty || cnicPhoto.touched)"
+                class="alert-danger"
+              >
+                <div *ngIf="cnicPhoto.errors?.['required']">CNIC Photo is required.</div>
+              </div>
+              </div>
+            </div>
+
+            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 mb-3"  *ngIf="!isFreelancer">
+              <div class="form-group">
+                <label for="officePhoto">Office Photo</label>
+                <input
+                  type="file"
+                  id="OfficeImage"
+                  name="OfficeImage"
+                  class="form-control"
+                  (change)="onFileChange($event, 'OfficeImage')"
+                  required
+                  #officePhoto="ngModel"
+                  [(ngModel)]="model.officePhoto"
+                  
+
+                />
+                <div
+                *ngIf="officePhoto.invalid && (officePhoto.dirty || officePhoto.touched)"
+                class="alert-danger"
+              >
+                <div *ngIf="officePhoto.errors?.['required']">Office Photo is required.</div>
+              </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row align-items-end">
+            <div class="row gutters">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-4">
+                <div class="d-flex">
+                  <button
+                    type="submit"
+                    id="submit"
+                    name="submit"
+                    class="btn btn-primary me-3"
+                  >
+                    Register
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

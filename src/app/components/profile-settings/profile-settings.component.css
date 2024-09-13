@@ -1,0 +1,37 @@
+.profile-settings {
+    margin: 20px;
+  }
+  
+  .settings-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  
+  .section-item {
+    border: 1px solid #ddd;
+    padding: 15px;
+    background-color: #f9f9f9;
+  }
+  
+  .section-item h4 {
+    margin: 0 0 10px 0;
+  }
+  
+  .section-item a {
+    color: #007bff;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .section-item a:hover {
+    text-decoration: underline;
+  }
+  
+  .profile-content {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+  }
+  

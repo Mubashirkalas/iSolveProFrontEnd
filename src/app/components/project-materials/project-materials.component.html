@@ -1,0 +1,34 @@
+<div class="main-content app-content">
+    <div class="container-fluid">
+        <div *ngIf="selectedProject; else noProject">
+            <h1 class="text-center" >Marketing Material for {{ selectedProject.projectName }}</h1>
+          
+            <ul *ngIf="marketingMaterials.length > 0; else noMaterials"  class="materials-container">
+              <li *ngFor="let material of marketingMaterials" class="material-box">
+                <div *ngIf="material.type === 'brochure'" class="material-content">
+                  <a [href]="material.link"  download>{{ material.name }}</a>
+                </div>
+                <div *ngIf="material.type === 'image'" class="material-content">
+                    <a [href]="material.link" download>{{ material.name }}</a>
+                  </div>
+                <div *ngIf="material.type === 'video'" class="material-content">
+                    <a [href]="material.link" target="_blank" rel="noopener noreferrer">{{ material.name }}</a>
+                  </div>
+                  <div *ngIf="material.type === 'floorplan'" class="material-content">
+                    <a [href]="material.link" download>{{ material.name }}</a>
+                  </div>
+              </li>
+            </ul>
+          
+            <ng-template #noMaterials>
+              <h6>No marketing materials available for this project.</h6>
+            </ng-template>
+          </div>
+          
+          <ng-template #noProject>
+            <h6>Please select a project to view and upload marketing materials.</h6>
+          </ng-template>
+          
+  
+   </div>
+  </div>

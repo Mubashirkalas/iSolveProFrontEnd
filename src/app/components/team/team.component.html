@@ -1,0 +1,22 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="offcanvas" data-bs-target="#teamTrigger">
+    Add Team
+</button>
+
+<div class="offcanvas offcanvas-start" id="teamTrigger">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title">Add Team</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body">
+        <form (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+                <label for="formGroupExampleInput" class="form-label">Name</label>
+                <input type="text" class="form-control" id="teamName" placeholder="Enter team name"
+                    [(ngModel)]="model.TeamName" name="TeamName" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+    </div>
+</div>

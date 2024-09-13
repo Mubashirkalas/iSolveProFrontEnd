@@ -1,0 +1,49 @@
+.registration-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    background-color: #f9f9f9; /* Light background color */
+  }
+  
+  .registration-form {
+    width: 100%;
+    max-width: 800px; /* Adjust as needed */
+  }
+  
+  .card {
+    border: none; /* Remove border if you don't want it */
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    background-color: #fff;
+  }
+  
+  .card-body {
+    padding: 20px;
+  }
+  
+  .form-control {
+    border-radius: 4px;
+    border: 1px solid #ddd;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3;
+  }
+  
+  .alert-danger {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 5px;
+  }
+  

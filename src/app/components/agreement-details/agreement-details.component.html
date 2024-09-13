@@ -1,0 +1,199 @@
+
+<div class="main-content app-content">
+
+    <div class="container-fluid" >
+        
+          <!-- Page Header -->
+          <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
+            <div>
+                <h1 class="page-title fw-semibold fs-20 mt-3 mb-0">Agreement Details</h1>
+            </div>
+            <div class="ms-auto pageheader-btn">
+                <button class="btn btn-primary mt-3" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
+                    <i class="fe fe-plus mx-1 align-middle"></i>  
+                </button>
+            </div>
+        </div>
+        <!-- Page Header Close -->
+         <hr>
+
+          <!--Listing Start-->
+          <div class="row-mt-5" >
+            <div class="col-md-12">
+                <table id="table" class="table table-bordered" >
+                    
+                    <thead>
+                        <tr>
+                            <th>Advance</th>
+                            <th>Recurring Payments</th>
+                            <th>Security Deposit</th>
+                            <th>Annual Increment</th>
+                            <th>Lease Start Date</th>
+                            <th>Lease End Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let agreement of agreements">
+                            <td>{{ agreement.advance }}</td>
+                            <td>{{ agreement.recurringPayments }}</td>
+                            <td>{{ agreement.securityDeposit }}</td>
+                            <td>{{ agreement.annualIncrement }}</td>
+                            <td>{{ agreement.leaseStartDate | date }}</td>
+                            <td>{{ agreement.leaseEndDate | date }}</td>
+                            <td>
+                                <div class="d-flex gap-2">
+                                <button (click)="editAgreement(agreement.id)" title="Edit" class="btn btn-icon btn-sm btn-info-transparent rounded-pill"
+                                    data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions"
+                                    aria-controls="offcanvasWithBothOptions"> <i class="ri-edit-line"></i>
+                                </button>
+                                &nbsp;
+                                <button (click)="deleteAgreement(agreement.id)" title="Delete" class="btn btn-icon btn-sm btn-danger-transparent rounded-pill">
+                                    <i class="ri-delete-bin-line"></i>
+                                </button>
+                            </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+          </div>
+
+          <!--Listing End-->
+
+           <!-- Offcanvas component -->
+        <div class="offcanvas offcanvas-end w-50" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
+        aria-labelledby="offcanvasWithBothOptionsLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Add Agreement Details</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"
+                ></button>
+        </div>
+        <div class="offcanvas-body">
+            <form>
+
+                <div *ngIf="successMessage" class="alert alert-success">
+                    {{ successMessage }}
+                  </div>
+
+                  <div *ngIf="errorMessage" class="alert alert-danger">
+                    {{ errorMessage }}
+                  </div>
+
+                <div class="mb-3">
+                    <label for="advance" class="form-label">Advance</label>
+                    <input type="text"
+                     class="form-control" 
+                     id="advance" 
+                     name="advance" 
+                     pattern="^[0-9]*$"
+                     required  
+                     [(ngModel)]="model.advance" 
+                     #advance="ngModel" >
+                    <div  *ngIf="advance.invalid && advance.touched" class="text-danger">
+                        Advance is required and must be a number</div>
+                </div>
+              
+                <div class="mb-3" >
+                    <label for="recurringPayments" class="form-label">Recurring Payments</label>
+                    <input type="text"
+                     id="recurringPayments"
+                      class="form-control" 
+                      name="recurringPayments"
+                      pattern="^[0-9]*$" 
+                      required 
+                      [(ngModel)]="model.recurringPayments" 
+                      #recurringPayments="ngModel" >
+
+                    <div *ngIf="recurringPayments.invalid && recurringPayments.touched" class="text-danger">
+                        Recurring Payments is required and must be a number</div>
+                    <input type="file" name="paymentFilePath" 
+                      class="form-control mt-2 file-input" (change)="onFileSelected($event, 'paymentFilePath')">
+                </div>
+
+                <div class=" mb-3">
+                    <label for="securityDeposit" class="form-label">Security Deposit Amount</label>
+                    <input type="text" 
+                    class="form-control" 
+                    id="securityDeposit"  
+                    name="securityDeposit" 
+                    [(ngModel)]="model.securityDeposit"
+                    required
+                    pattern="^[0-9]*$"
+                    #securityDeposit="ngModel" >
+
+                    <div *ngIf="securityDeposit.invalid && securityDeposit.touched" class="text-danger">
+                        Security Deposit Amount is required and must be a number
+                    </div>
+                    <input type="file" class="form-control mt-2" name="securityChequesFilePath" 
+                   
+                      (change)="onFileSelected($event, 'securityChequesFilePath')" >
+
+                  </div>
+
+                  <div class=" mb-3">
+                    <label for="annualIncrement" class="form-label">Annual Increment</label>
+                    <input 
+                    type="text"
+                     class="form-control" 
+                     id="annualIncrement"  
+                     name="annualIncrement"
+                     required
+                     pattern="^[0-9]*$"
+                     [(ngModel)]="model.annualIncrement"
+                     #annualIncrement="ngModel">
+                     
+                     <div *ngIf="annualIncrement.invalid && annualIncrement.touched" class="text-danger">
+                        Annual Increment is required and must be number </div>
+                    <input type="file" class="form-control mt-2" name="agreementFilePath" 
+                     (change)="onFileSelected($event, 'agreementFilePath')" >
+                  </div>
+                  
+                  <div class="row mb-3" >
+                  <div class="col">
+                    <label for="leaseStartDate" class="form-label">Lease Start Date</label>
+                    <input 
+                    type="date" 
+                    class="form-control" 
+                    id="leaseStartDate"  
+                    name="leaseStartDate"
+                    required
+                    [(ngModel)]="model.leaseStartDate"
+                    #leaseStartDate="ngModel">
+                  </div>
+
+                  <div *ngIf="leaseStartDate.invalid && leaseStartDate.touched" class="text-danger">
+                    Lease Start Date is required 
+                  </div>
+
+                  <div class="col">
+                    <label for="leaseEndDate" class="form-label">Lease End Date</label>
+                    <input 
+                    type="date" 
+                    class="form-control" 
+                    id="leaseEndDate" 
+                     name="leaseEndDate"
+                     required
+                     [(ngModel)]="model.leaseEndDate"
+                     #leaseEndDate="ngModel">
+                  </div>
+                  <div *ngIf="leaseEndDate.invalid && leaseEndDate.touched" class="text-danger">
+                    Lease End Date is required
+                  </div>
+                </div>
+                
+
+                <button type="button" class="btn btn-outline-primary"  (click)="onSubmit()" >Submit</button>
+            </form>
+
+
+
+
+        </div>
+    </div>
+
+    </div>
+
+</div>

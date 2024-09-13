@@ -1,0 +1,20 @@
+{
+  "routes": [
+    "/agreementDetails",
+    "/announcement",
+    "/assigntask",
+    "/block",
+    "/dashboard",
+    "/edit-company-profile",
+    "/floor",
+    "/formschild",
+    "/login",
+    "/profile",
+    "/profileSettings",
+    "/project-materials",
+    "/projectDetails",
+    "/realtor",
+    "/subcompany",
+    "/team"
+  ]
+}

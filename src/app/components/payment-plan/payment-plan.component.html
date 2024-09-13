@@ -1,0 +1,54 @@
+<div class="container-fluid">
+  <!-- Project Details Section -->
+  <h2 class="text-center">Payment Plan</h2>
+  <div class="project-details-table">
+    <table class="table table-bordered">
+      <tbody>
+        <tr  *ngIf="selectedDetails.length > 0">
+          <th scope="row">Area</th>
+          <td class="tdata">{{selectedDetails[0].areaName }}</td>
+        </tr>
+        <tr  *ngIf="selectedDetails.length > 0">
+          <th scope="row">Block Name</th>
+          <td class="tdata">{{ selectedDetails[0].blockName }}</td>
+        </tr>
+        <tr *ngIf="selectedDetails.length > 0">
+          <th scope="row">Status</th>
+          <td class="tdata">{{ selectedDetails[0].status }}</td>
+        </tr>
+        <tr *ngIf="selectedDetails.length > 0">
+          <th scope="row">Sales Price</th>
+          <td class="tdata">{{ selectedDetails[0].salesPrice | currency: 'USD' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Payment Plan Installments Section -->
+  <h2 class="text-center">Payment Plan Installments</h2>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Installment</th>
+        <th>Amount</th>
+        <th>Due Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- <tr *ngFor="let plan of paymentPlans">
+        <td>{{ plan.installment }}</td>
+        <td>{{ plan.amount | currency: 'USD' }}</td>
+        <td>{{ plan.dueDate | date }}</td>
+      </tr> -->
+    </tbody>
+  </table>
+
+  <!-- Project Map Section -->
+  <h2 class="text-center">Project Map</h2>
+  <img src="assets/pics/project-map-placeholder.jpg" alt="Project Map" style="width: 100%;">
+
+  <!-- Print Button -->
+  <div class="text-center mt-4">
+    <button class="btn btn-success" (click)="printPage()">Print</button>
+  </div>
+</div>

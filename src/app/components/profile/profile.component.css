@@ -1,0 +1,17 @@
+.user-avatar {
+    width: 200px; /* Adjust width as needed */
+    height: 200px; /* Adjust height as needed */
+    overflow: hidden;
+    position: relative;
+   
+}
+  
+  .user-avatar img {
+    width: 100%;
+    
+    object-fit: cover; /* Ensures the image covers the container without distortion */
+    object-position: center; /* Centers the image within the container */
+  }
+
+
+

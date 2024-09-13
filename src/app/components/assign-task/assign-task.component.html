@@ -1,0 +1,45 @@
+<!-- Button to open offcanvas -->
+<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
+    Assign Task
+  </button>
+  
+  <!-- Offcanvas component -->
+  <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Task Name</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <form>
+        <div class="mb-3">
+          <label for="assignedUser" class="form-label">Assigned User</label>
+          <select name="AssignedUserId" class="form-control form-select" [(ngModel)]="model.AssignedUserId">
+            <option value="">Select User</option>
+            <option value="Umar">Umar</option>
+            <option value="Subhan">Subhan</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="step" class="form-label">Step</label>
+          <select name="Step" class="form-control form-select" [(ngModel)]="model.Step">
+            <option value="">Select Step</option>
+            <option value="step1">Step 1</option>
+            <option value="step2">Step 2</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="targetDate" class="form-label">Target Date</label>
+          <input type="date" class="form-control" id="targetDate" name="TargetDate" [(ngModel)]="model.TargetDate">
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <textarea class="form-control" id="description" rows="2" placeholder="Enter description" name="Description" [(ngModel)]="model.Description"></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="remarks" class="form-label">Remarks</label>
+          <textarea class="form-control" id="remarks" rows="2" placeholder="Enter remarks" name="Remarks" [(ngModel)]="model.Remarks"></textarea>
+        </div>
+        <a type="Submit" class="btn btn-outline-primary" (click)="onSubmit()">Submit</a>
+      </form>
+    </div>
+  </div>

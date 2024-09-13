@@ -1,0 +1,35 @@
+.toast {
+    position: fixed;
+    top: 1%;
+    right: 0rem; /* Position toast on the right side */
+    min-width: 200px;
+    color: #fff; /* White text color */
+    font-family: Arial, sans-serif;
+    font-size: 0.875rem;
+    z-index: 1050; /* Ensure the toast appears above other elements */
+    opacity: 1;
+    transition: opacity 0.5s ease-out; /* Smooth fade-out transition */
+}
+
+.toast-header, .toast-body {
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+}
+
+.toast-success {
+    background-color: hsla(134, 39%, 30%, 0.804);
+    color:white;
+    background-color: hsla(134, 50%, 30%, 0.429); /* Green color */
+}
+
+.toast-success .toast-header {
+    background-color: hsla(134, 50%, 38%, 0.6); /* Darker green for header */
+}
+
+.toast-error {
+    background-color: #ba2837c7; /* Red color */
+}
+
+.toast-error .toast-header {
+    background-color: #c82333; /* Darker red for header */
+}

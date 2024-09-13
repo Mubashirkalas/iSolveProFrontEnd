@@ -1,0 +1,130 @@
+<div class="main-content app-content">
+  <div class="container-fluid">
+    <div class="col-md-12 text-center mb-4 project-title">
+      <h2 *ngIf="selectedProject">
+        <span>{{ selectedProject.projectName }} by iSolve</span>
+      </h2>
+    </div>
+    
+      <div class="container" >
+      <div class="row">
+        <!-- Loop through groupedProjectDetails -->
+        <div *ngFor="let block of groupedProjectDetails | keyvalue" class="col-lg-6 col-md-12 mb-3">
+          <div class="card flooring">
+            <div class="card-header">
+              <h2  class="fs-5">{{ block.key }} </h2> <!-- Block name -->
+            </div>
+            <div class="card-body"  >
+              <div class="row">
+                <!-- Loop through details for the current block -->
+                <div *ngFor="let detail of block.value" class="col-6 col-sm-3 col-md-2 col-lg-2 mb-1 detail">
+                  <div class="card-body " scope="col"
+                  [ngClass]="{
+                    available: detail.status !== 'Sold',
+                    sold: detail.status === 'Sold'}"
+                    (click)="openModal(detail)">
+                   
+                    <h6 class="fs-7"> {{ detail.propertyDescription }}</h6>
+                    <h6 class="fs-7"> {{ detail.areaName }}</h6>
+                    <h6 class="fs-7"> {{ detail.status }}</h6>
+                    <h6 class="fs-7"> {{
+                      detail.salesPrice
+                        ? (detail.salesPrice | currency : "USD")
+                        : 'N/A'
+                    }}</h6>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  </div>
+
+  <!-- Modal -->
+<div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalLabel">{{ selectedDetail?.propertyDescription }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <th scope="row">Area</th>
+              <td class="tdata" >{{ selectedDetail?.areaName }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Block Name</th>
+              <td class="tdata" >{{ selectedDetail?.blockName }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Status</th>
+              <td class="tdata" >{{ selectedDetail?.status }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Sales Price</th>
+              <td class="tdata" >{{ selectedDetail?.salesPrice | currency : 'USD' }}</td>
+            </tr>
+            <!-- Add more rows for other details as needed -->
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <a [routerLink]="['/payment-plan' , selectedDetail?.serialNo]" target="_blank" class="btn btn-primary">Payment Plan</a>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- <div class="container">
+  <div class="row">
+    <div
+      class="col-md-6 card flooring"
+      *ngFor="let block of groupedProjectDetails | keyvalue"
+    >
+      <h2> {{ block.key }}</h2>
+      <table
+        class="table table-bordered dt-responsive nowrap invent-resu"
+        style="width: 100% !important"
+      >
+        <tbody>
+          <tr *ngFor="let detail of block.value">
+            <td
+              scope="col"
+              [ngClass]="{
+                available: detail.status !== 'Sold',
+                sold: detail.status === 'Sold'
+              }"
+            >
+              <a
+                href="#"
+                class="show_apt"
+                [attr.data-identity]="detail.serialNo"
+                [attr.data-name]="detail.propertyDescription"
+              >
+                {{ detail.propertyDescription }}<br />
+                {{ detail.areaName }}<br />
+                {{ detail.status }}<br />
+                {{
+                  detail.salesPrice
+                    ? (detail.salesPrice | currency : "USD")
+                    : detail.status
+                }}
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div> -->

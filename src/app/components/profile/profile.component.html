@@ -1,0 +1,207 @@
+<div class="main-content app-content">
+    <div class="container-fluid">
+       
+        <div class="row gutters">
+            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+            <div class="card h-100">
+                <div class="card-body d-flex justify-content-center align-items-center">
+                   
+                    <div class="account-settings">
+                        <div class="user-profile">
+                            <div class="user-avatar">
+                                <img #uploadedImage src="https://via.placeholder.com/300" class="img-fluid" alt="Upload Icon" style="cursor: pointer;" (click)="triggerFileInput()">
+                                
+                                <!-- hidden file input -->
+                                <input type="file" #fileInput style="display: none;" (change)="onFileSelected($event)" accept="image/*"> 
+                            </div>
+                            <h5 class="user-name mt-3">Adam Glen</h5>
+                    <h6 class="user-member">Member</h6>
+                    <h6 class="user-company">Company Manager</h6>
+                        </div>
+                        <div class="user-contact mt-4">
+                            <p><i class="bi bi-telephone-fill"></i> 03106337113</p>
+                            <p><i class="bi bi-envelope-fill"></i> adamgmail.com</p>
+                            <p><i class="bi bi-geo-alt-fill"></i> Sanfransisco</p>
+                            <p><i class="bi bi-building"></i> united States</p>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="row gutters">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <h6 class="mb-2 text-primary">Edit Profile</h6>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 mb-3" >
+                            <div class="form-group">
+                                <label for="userName">User Name</label>
+                                <input type="text" class="form-control" id="userName" placeholder="Enter User name">
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                            <div class="form-group">
+                                <label for="eMail">Email</label>
+                                <input type="email" class="form-control" id="eMail" placeholder="Enter email ID">
+                            </div>
+                        </div>
+                          
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12  mb-3" >
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <input type="text" class="form-control" id="firstName" placeholder="Enter first name">
+                            </div>
+                        </div>
+
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" class="form-control" id="lastName" placeholder="Enter Last name">
+                            </div>
+                        </div>
+
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                            <div class="form-group">
+                                <label for="phone">Mobile Number</label>
+                                <div class="wrapper">
+                                <ngx-intl-tel-input
+                                id="phone"
+        [cssClass]="'custom'"
+        [preferredCountries]="preferredCountries"
+        [enableAutoCountrySelect]="true"
+        [enablePlaceholder]="true"
+        [searchCountryFlag]="true"
+        [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name ]"
+        [selectFirstCountry]="false"
+        [selectedCountryISO]="CountryISO.Pakistan"
+        [maxLength]="15"
+        [phoneValidation]="true"
+        [separateDialCode]="separateDialCode"
+        [numberFormat]="PhoneNumberFormat.International"
+        name="phone"
+        class="form-control"
+        
+       
+       
+      >
+      </ngx-intl-tel-input>
+     
+    </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 mb-3">
+                            <div class="form-group">
+                                <label for="gender">Gender</label>
+                                <select class="form-control" id="gender" class="form-control">
+                                    <option value="">Select Gender</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row align-items-end ">
+                        <!-- Country Field -->
+                        <div class="col-xl-4 mb-3">
+                            <div class="form-group">
+                                <label for="country">Country</label>
+                                <select id="country" (change)="onCountryChange($event)" class="form-control">
+                                    <option value="" disabled selected>Select Country</option>
+                                    <option *ngFor="let country of countries" [value]="country.isoCode" >
+                                      {{ country.name }}
+                                    </option>
+                                  </select>
+                            </div>
+                        </div>
+                        <!-- State Field -->
+                        <div class="col-xl-4 mb-3">
+                            <div class="form-group">
+                                <label for="state">State</label>
+                                <select id="state" (change)="onStateChange($event)" [disabled]="!states.length" class="form-control">
+                                    <option value="" disabled selected>Select State</option>
+                                    <option *ngFor="let state of states" [value]="state.isoCode">
+                                      {{ state.name }}
+                                    </option>
+                                  </select>
+                            </div>
+                        </div>
+                        <!-- City Field -->
+                        <div class="col-xl-4 mb-3">
+                            <div class="form-group">
+                                <label for="city">City</label>
+                                <select id="city" [disabled]="!cities.length" class="form-control">
+                                    <option value="" disabled selected>Select City</option>
+                                    <option *ngFor="let city of cities" [value]="city.name">
+                                      {{ city.name }}
+                                    </option>
+                                  </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Nationality Field -->
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12 mb-3">
+                            <div class="form-group">
+                                <label for="nationality">Nationality</label>
+                                <select id="nationality" class="form-control" >
+                                    <option value="">Select Nationality</option>
+                                    <option *ngFor="let country of countries" [value]="country.isoCode">
+                                      {{ country.name }}
+                                    </option>
+                                  </select>
+                            </div>
+                        </div>
+                    </div>
+               
+
+                    <div class="row gutters">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-4" >
+                            <div class="d-flex justify-content-center">
+                                <button type="button" id="submit" name="submit" class="btn btn-primary me-3">Update</button>
+                                <button type="button" id="submit" name="submit" class="btn btn-secondary me-3">Cancel</button>
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+
+
+<script>
+    // Get the image icon and file input elements
+    const imageIcon = document.getElementById('imageIcon');
+    const fileInput = document.getElementById('fileInput');
+
+    // When the image icon is clicked, trigger the file input
+    imageIcon.addEventListener('click', () => {
+        fileInput.click();
+    });
+
+    // Handle the file selection
+    fileInput.addEventListener('change', (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            // Optionally, display the selected image as the icon
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                imageIcon.src = e.target.result;
+            }
+            reader.readAsDataURL(file);
+
+            // Proceed with uploading the file or other logic
+            console.log('File selected:', file);
+        }
+    });
+</script>

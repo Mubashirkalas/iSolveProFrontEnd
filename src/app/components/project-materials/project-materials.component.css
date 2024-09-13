@@ -1,0 +1,49 @@
+/* Container for all marketing materials */
+.materials-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Spacing between blocks */
+    justify-content: center; /* Center the blocks horizontally */
+    margin: 20px 0;
+  }
+  
+  /* Styling for each material block */
+  .material-box {
+    flex: 1 1 calc(25% - 20px); /* Adjust the width to show 4 blocks in a row with spacing */
+    box-sizing: border-box;
+    border: 1px solid #ddd; /* Border around each block */
+    border-radius: 8px; /* Rounded corners */
+    padding: 15px;
+    text-align: center;
+    background-color: #f9f9f9;
+    transition: box-shadow 0.3s, transform 0.3s;
+  }
+  
+  .material-box:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow on hover */
+    transform: scale(1.02); /* Slightly scale up on hover */
+  }
+  
+  /* Styling for images inside the blocks */
+  .material-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px; /* Rounded corners for images */
+  }
+  
+  /* Common styling for the content inside each block */
+  .material-content {
+    margin: 10px 0;
+  }
+  
+  .material-content a {
+    color: #333;
+    text-decoration: none;
+    font-size: 16px;
+  }
+  
+  .material-content a:hover {
+    text-decoration: underline;
+    color: #007bff; /* Change color on hover */
+  }
+  
