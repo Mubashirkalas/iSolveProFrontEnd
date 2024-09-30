@@ -1,0 +1,48 @@
+/* Card container */
+.theme-card {
+    display: flex;
+    align-items: center;
+    background-color: #f8f9fa; /* Light background color */
+    border-radius: 8px;
+    padding: 10px;
+    width: 250px;  /* Adjust as needed */
+    height: 100px; /* Adjust height for your design */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Light shadow */
+    border-left: 5px solid #fbb03b; /* Yellow/orange border on the left */
+  }
+  
+  /* Icon styles */
+  .card-icon {
+    background-color: #fbb03b; /* Yellow/orange background */
+    color: white;
+    padding: 15px;
+    font-size: 24px;
+    border-radius: 50%; /* Make the icon circular */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+  }
+  
+  /* Card content (text) */
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  /* Title text */
+  .card-title {
+    font-size: 12px;
+    color: #6c757d; /* Gray text for the title */
+    margin: 0;
+  }
+  
+  /* Value text */
+  .card-value {
+    font-size: 30px;
+    font-weight: bold;
+    color: #343a40; /* Darker color for the value */
+    margin: 0;
+  }
+  

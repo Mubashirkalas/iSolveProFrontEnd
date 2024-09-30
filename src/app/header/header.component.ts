@@ -32,7 +32,7 @@ export class HeaderComponent implements AfterViewInit{
      this.router.events.subscribe(() => {
       // Hide header for login route
       const currentRoute = this.router.url;
-      this.showHeader = currentRoute !== '/login' && currentRoute !=='/realtor' && !currentRoute.startsWith('/payment-plan'); // Change '/login' based on your login route
+      this.showHeader =!['/login', '/realtor'].includes(currentRoute) && !currentRoute.includes('/payment-plan'); // Change '/login' based on your login route
       
     });
   }

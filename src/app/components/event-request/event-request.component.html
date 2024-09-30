@@ -1,0 +1,202 @@
+<div class="main-content app-content">
+    <div class="container-fluid">
+        
+ 
+<!-- event-request.component.html -->
+   
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-header-text">Event Proposal Report</h5>
+      </div>
+      <!-- Step Wizard Navigation -->
+      <div class="stepwizard">
+        <div class="stepwizard-row setup-panel">
+          <div class="stepwizard-step">
+            <button type="button" class="btn btn-primary btn-circle" [ngClass]="{'btn-primary': currentStep === 1}" (click)="setStep(1)">1</button>
+            <p>Event Details</p>
+          </div>
+          <div class="stepwizard-step">
+            <button type="button" class="btn btn-primary btn-circle" [ngClass]="{'btn-primary': currentStep === 2}" (click)="setStep(2)">2</button>
+            <p>Past Performance</p>
+          </div>
+          <div class="stepwizard-step">
+            <button type="button" class="btn btn-primary btn-circle" [ngClass]="{'btn-primary': currentStep === 3}" (click)="setStep(3)">3</button>
+            <p>Expected Outcome</p>
+          </div>
+        </div>
+      </div>
+  
+      <div class="card-body">
+      <!-- Forms -->
+      <form role="form"  #eventForm="ngForm" (ngSubmit)="onSubmit(eventForm)">
+        <div [ngSwitch]="currentStep">
+          <!-- Step 1: Event Details -->
+          <div *ngSwitchCase="1" class="setup-content" [ngClass]="{'active': currentStep === 1}">
+            <h4>Event Details</h4>
+            <div class="form-group row mb-3">
+              <label for="event_title" class="col-sm-4 col-form-label">Event Title*</label>
+              <div class="col-sm-8">
+                <input type="text" name="event_title" [(ngModel)]="eventReport.eventTitle" class="form-control" id="event_title" required />
+              </div>
+            </div>
+            <div class="form-group row mb-3">
+              <label for="date_of_event" class="col-sm-4 col-form-label">Date of Event*</label>
+              <div class="col-sm-8">
+                <input type="date" name="date_of_event" [(ngModel)]="eventReport.dateOfEvent" class="form-control" id="date_of_event" required />
+              </div>
+            </div>
+            <div class="form-group row mb-3">
+              <label for="event_city" class="col-sm-4 col-form-label">City*</label>
+              <div class="col-sm-8">
+                <input type="text" name="event_city" [(ngModel)]="eventReport.city" class="form-control" id="event_city" required/>
+              </div>
+            </div>
+            <div class="form-group row mb-3">
+              <label for="event_country" class="col-sm-4 col-form-label">Country*</label>
+              <div class="col-sm-8">
+                <input type="text" name="event_country" [(ngModel)]="eventReport.country" class="form-control" id="event_country" required />
+              </div>
+            </div>
+            <div class="form-group row mb-3">
+              <label for="event_venue" class="col-sm-4 col-form-label">Event Venue*</label>
+              <div class="col-sm-8">
+                <input type="text" name="event_venue" [(ngModel)]="eventReport.eventVenue" class="form-control" id="event_venue" required />
+              </div>
+            </div>
+            <div class="form-group row mb-3">
+              <label for="focus_project" class="col-sm-4 col-form-label">Focus Project*</label>
+              <div class="col-sm-8">
+                <input type="text" name="focus_project" [(ngModel)]="eventReport.focusProject" class="form-control" id="focus_project" required />
+              </div>
+            </div>
+            <div class="form-group row mb-3">
+              <label for="product_type" class="col-sm-4 col-form-label">Product Type (Apartment / TH)</label>
+              <div class="col-sm-8">
+                <input type="text" name="product_type" [(ngModel)]="eventReport.productType" class="form-control" id="product_type" required/>
+              </div>
+            </div>
+            <div class="form-group row mb-3">
+              <label for="sales_support_required" class="col-sm-4 col-form-label">iSolve Sales Support Required*</label>
+              <div class="col-sm-8">
+                <div class="form-check form-check-inline">
+                  <input type="radio" id="sales_support_yes" name="sales_support_required" [(ngModel)]="eventReport.salesSupportRequired" value="yes" class="form-check-input" required />
+                  <label class="form-check-label" for="sales_support_yes">Yes</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input type="radio" id="sales_support_no" name="sales_support_required" [(ngModel)]="eventReport.salesSupportRequired" value="no" class="form-check-input" required/>
+                  <label class="form-check-label" for="sales_support_no">No</label>
+                </div>
+              </div>
+            </div>
+            <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" (click)="nextStep()">Next</button>
+          </div>
+      
+          <!-- Step 2: Past Performance -->
+          <div *ngSwitchCase="2" class="setup-content" [ngClass]="{'active': currentStep === 2}">
+            <h3>Past Performance in Same Region</h3>
+            <div class="form-group row mb-3">
+              <label for="no_of_events" class="col-sm-4 col-form-label">No. of Events - City Specific*</label>
+              <div class="col-sm-8">
+                <input type="text" name="no_of_events" [(ngModel)]="eventReport.noOfEventsCitySpecific" class="form-control" id="no_of_events" required/>
+              </div>
+            </div>
+            <div class="form-group row mb-3">
+              <label for="avg_meeting_per_event" class="col-sm-4 col-form-label">Average Meeting per Event - City Specific*</label>
+              <div class="col-sm-8">
+                <input type="text" name="avg_meeting_per_event" [(ngModel)]="eventReport.avgMeetingPerEvent" class="form-control" id="avg_meeting_per_event" required/>
+              </div>
+            </div>
+            <div class="form-group row mb-3">
+              <label for="avg_sales_volume_per_event" class="col-sm-4 col-form-label">Average Sales Volume per Event - City Specific</label>
+              <div class="col-sm-8">
+                <input type="text" name="avg_sales_volume_per_event" [(ngModel)]="eventReport.avgSalesVolumePerEvent" class="form-control" id="avg_sales_volume_per_event" required />
+              </div>
+            </div>
+            <div class="form-group row mb-3">
+              <label for="property_type" class="col-sm-4 col-form-label">Property Type (TH / Apartment) / Ready / Off-plan*</label>
+              <div class="col-sm-8">
+                <input type="text" name="property_type" [(ngModel)]="eventReport.propertyType" class="form-control" id="property_type" required />
+              </div>
+            </div>
+            <div class="form-group row mb-3">
+              <label for="lead_source" class="col-sm-4 col-form-label">Lead Source (Marketing / Existing Database)</label>
+              <div class="col-sm-8">
+                <input type="text" name="lead_source" [(ngModel)]="eventReport.leadSource" class="form-control" id="lead_source" required/>
+              </div>
+            </div>
+            <div class="form-group row mb-3">
+              <label for="marketing_medium_used" class="col-sm-4 col-form-label">Marketing Medium Used*</label>
+              <div class="col-sm-8">
+                <input type="text" name="marketing_medium_used" [(ngModel)]="eventReport.marketingMediumUsed" class="form-control" id="marketing_medium_used" required />
+              </div>
+            </div>
+            <button class="btn btn-primary prevBtn btn-lg pull-left" (click)="prevStep()">Previous</button>
+            <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" (click)="nextStep()">Next</button>
+          </div>
+      
+          <!-- Step 3: Expected Outcome -->
+          <div *ngSwitchCase="3" class="setup-content" [ngClass]="{'active': currentStep === 3}">
+            <h3>Expected Outcome</h3>
+            <div class="form-group row mb-3">
+              <label for="no_of_existing_leads" class="col-sm-4 col-form-label">No. of Existing Leads (Not older than 90 Days)</label>
+              <div class="col-sm-8">
+                <input type="text" name="no_of_existing_leads" [(ngModel)]="eventReport.noOfExistingLeads" class="form-control" id="no_of_existing_leads" required/>
+              </div>
+            </div>
+            <div class="form-group row mb-3">
+              <label for="no_of_investor_database_target" class="col-sm-4 col-form-label">No. of Existing Investor Database to be Targeted</label>
+              <div class="col-sm-8">
+                <input type="text" name="no_of_investor_database_target" [(ngModel)]="eventReport.noOfInvestorDatabaseTarget" class="form-control" id="no_of_investor_database_target" required />
+              </div>
+            </div>
+
+            <div class="form-group row mb-3">
+                <label for="leads_source" class="col-sm-4 col-form-label">Other Sources of Leads</label>
+                <div class="col-sm-8">
+                  <input type="text" name="leads_source" [(ngModel)]="eventReport.otherSourcesOfLeads"  class="form-control" id="leads_source" required />
+                </div>
+              </div>
+  
+              <div class="form-group row mb-3">
+                  <label for="marketing_budget" class="col-sm-4 col-form-label">Marketing Budget for Event</label>
+                  <div class="col-sm-8">
+                    <input type="text" name="marketing_budget" [(ngModel)]="eventReport.marketingBudget"  class="form-control" id="marketing_budget" required/>
+                  </div>
+                </div>
+  
+                <div class="form-group row mb-3">
+                  <label for="marketing_platform" class="col-sm-4 col-form-label">Marketing Platform for Lead Generation</label>
+                  <div class="col-sm-8">
+                    <input type="text" name="marketing_platform"  [(ngModel)]="eventReport.marketingPlatform" class="form-control" id="marketing_platform" required/>
+                  </div>
+                </div>
+  
+                <div class="form-group row mb-3">
+                  <label for="expected_leads" class="col-sm-4 col-form-label">Nos of Leads Expected for the Event (New Marketing Campaign)</label>
+                  <div class="col-sm-8">
+                    <input type="text" name="expected_leads" [(ngModel)]="eventReport.noOfLeadsExpected" class="form-control" id="expected_leads" required/>
+                  </div>
+                </div>
+  
+                <div class="form-group row mb-3">
+                  <label for="expected_walkins" class="col-sm-4 col-form-label">Nos of walkins expected from the new marketing campaign</label>
+                  <div class="col-sm-8">
+                    <input type="text" name="expected_walkins" [(ngModel)]="eventReport.noOfWalkinsExpected"  class="form-control" id="expected_walkins" required/>
+                  </div>
+                </div>
+           
+            <button class="btn btn-primary prevBtn btn-lg pull-left" (click)="prevStep()">Previous</button>
+            <button class="btn btn-primary submitBtn btn-lg pull-right" type="submit">Submit</button>
+          </div>
+        </div>
+      </form>
+      
+    </div>
+    </div>
+  </div>
+  
+  
+  
+  
+
+</div>

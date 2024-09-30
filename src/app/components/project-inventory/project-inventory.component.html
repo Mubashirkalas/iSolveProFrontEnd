@@ -50,7 +50,7 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalLabel">{{ selectedDetail?.propertyDescription }}</h5>
+        <h5 class="modal-title" id="modalLabel">{{ selectedDetail.propertyDescription }}</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -58,19 +58,19 @@
           <tbody>
             <tr>
               <th scope="row">Area</th>
-              <td class="tdata" >{{ selectedDetail?.areaName }}</td>
+              <td class="tdata" >{{ selectedDetail.areaName }}</td>
             </tr>
             <tr>
               <th scope="row">Block Name</th>
-              <td class="tdata" >{{ selectedDetail?.blockName }}</td>
+              <td class="tdata" >{{ selectedDetail.blockName }}</td>
             </tr>
             <tr>
               <th scope="row">Status</th>
-              <td class="tdata" >{{ selectedDetail?.status }}</td>
+              <td class="tdata" >{{ selectedDetail.status }}</td>
             </tr>
             <tr>
               <th scope="row">Sales Price</th>
-              <td class="tdata" >{{ selectedDetail?.salesPrice | currency : 'USD' }}</td>
+              <td class="tdata" >{{ selectedDetail.salesPrice | currency : 'USD' }}</td>
             </tr>
             <!-- Add more rows for other details as needed -->
           </tbody>
@@ -78,7 +78,12 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <a [routerLink]="['/payment-plan' , selectedDetail?.serialNo]" target="_blank" class="btn btn-primary">Payment Plan</a>
+        <button type="button" class="btn btn-primary" (click)="goToPaymentPlan(selectedDetail.projectSerialNo)">
+          View Payment Plan
+        </button>
+        <!-- <a (click)="selectedDetail && download(selectedDetail.srno!, selectedDetail.sNo!,selectedDetail.financialYear!)" 
+        class="btn btn-primary" 
+        href="javascript:void(0)">Payment Plan</a> -->
 
       </div>
     </div>

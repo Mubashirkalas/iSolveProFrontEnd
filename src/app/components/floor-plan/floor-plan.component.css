@@ -1,0 +1,29 @@
+.custom-button {
+    background-color: #28a745; /* Green background */
+    color: white; /* White text */
+    border: none; /* No border */
+    padding: 10px 15px; /* Padding for button */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-weight: bold; /* Bold text */
+    font-size: 14px; /* Font size */
+    transition: background-color 0.3s, transform 0.2s; /* Transition for hover and active states */
+}
+
+/* Hover effect */
+.custom-button:hover {
+    background-color: #218838; /* Darker green on hover */
+    transform: scale(1.05); /* Slightly enlarge button */
+}
+
+/* Active effect */
+.custom-button:active {
+    background-color: #1e7e34; /* Even darker green when pressed */
+    transform: scale(0.95); /* Slightly shrink button */
+}
+
+/* Optional: Focus effect */
+.custom-button:focus {
+    outline: none; /* Remove outline */
+    box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.5); /* Add shadow for focus */
+}

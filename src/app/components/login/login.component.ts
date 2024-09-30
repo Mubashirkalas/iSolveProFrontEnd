@@ -23,9 +23,10 @@ login() {
   this.authService.login(this.userId, this.password).subscribe(
     response => {
        // Handle successful login
-       if (response && response.token) {
+       if (response && response.token && response.userId) {
         localStorage.setItem('token', response.token);  // Save token in localStorage
-        this.router.navigateByUrl('/team').then(() => {
+        localStorage.setItem('userId', response.userId);
+        this.router.navigateByUrl('/dashboard').then(() => {
           window.location.reload();  // Reload after navigating to the target route
         });
       } else {

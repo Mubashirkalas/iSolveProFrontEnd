@@ -1,0 +1,27 @@
+.ag-theme-quartz {
+    height: 100%; /* Ensure full height */
+    width: 100%;  /* Ensure full width */
+  }
+  
+  
+.grid-wrapper {
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Hide overflow from the wrapper */
+  }
+ 
+  .custom-header {
+    font-size: 10px; /* Adjust the font size as needed */
+    font-weight: bold; /* Optional: make it bold */
+    text-align: left; /* Optional: center the header text */
+  }
+  .ag-cell-value {
+    flex: 1 1 auto;
+    font-size: smaller;
+}
+
+.ag-cell-wrapper {
+  display: flex;
+  align-items: center;
+  font-size: smaller;
+}

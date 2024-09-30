@@ -3,18 +3,26 @@
     "/agreementDetails",
     "/announcement",
     "/assigntask",
+    "/BDMChange-request",
     "/block",
+    "/bookings",
+    "/comissions",
     "/dashboard",
     "/edit-company-profile",
+    "/event-request",
+    "/event-table",
     "/floor",
+    "/floor-plan",
     "/formschild",
     "/login",
+    "/payment-plan",
     "/profile",
     "/profileSettings",
     "/project-materials",
     "/projectDetails",
     "/realtor",
     "/subcompany",
-    "/team"
+    "/team",
+    "/update-password"
   ]
 }

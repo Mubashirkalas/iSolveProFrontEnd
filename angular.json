@@ -42,7 +42,12 @@
               "src/styles.css",
               "node_modules/jquery-ui/themes/base/datepicker.css",
               
-              "./node_modules/intl-tel-input/build/css/intlTelInput.css"
+              "./node_modules/intl-tel-input/build/css/intlTelInput.css",
+               "node_modules/datatables.net-dt/css/dataTables.dataTables.min.css",
+              
+               "node_modules/ag-grid-community/styles/ag-grid.css",
+               "node_modules/ag-grid-community/styles/ag-theme-quartz.css"
+              
               
             ],
             "scripts": [
@@ -50,7 +55,10 @@
               "node_modules/jquery-ui/dist/jquery-ui.min.js",
               "node_modules/select2/dist/js/select2.min.js",
               "node_modules/intl-tel-input/build/js/intlTelInput.min.js",
-              "./node_modules/@popperjs/core/dist/umd/popper.min.js"
+              "node_modules/@popperjs/core/dist/umd/popper.min.js"
+              
+             
+
              
                
             ],

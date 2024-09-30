@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
+import { HttpClient, HttpParams} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Project } from '../models/model-projects';
 import { ProjectInventoryDetail } from '../models/model-project-inventory';
+import { FloorPlanDetail } from '../models/model-floor-plan';
 import { BehaviorSubject } from 'rxjs';
+import { InstallmentPlan } from '../models/model-installments';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +13,8 @@ import { BehaviorSubject } from 'rxjs';
 export class ProjectService {
   private projectsApiUrl  = 'https://localhost:7026/api/Projects'
   private projectInventoryApiUrl = 'https://localhost:7026/api/ProjectInventory';
+  private upload = 'https://localhost:7026/api/ProjectInventory/upload';
+ 
   private selectedProjectSubject = new BehaviorSubject<any>(null);
   selectedProject$ = this.selectedProjectSubject.asObservable();
   
@@ -24,6 +28,10 @@ export class ProjectService {
    getProjectInventoryDetails(projectId: number): Observable<ProjectInventoryDetail[]>{
     return this.http.get<ProjectInventoryDetail[]>(`${this.projectInventoryApiUrl}/${projectId}`);
    }
+
+   getFloorPlanDetails(): Observable<FloorPlanDetail[]> {
+    return this.http.get<FloorPlanDetail[]>(`${this.projectInventoryApiUrl}`);
+  }
    
     setSelectedProject(project: any) {
       this.selectedProjectSubject.next(project);
@@ -37,4 +45,27 @@ export class ProjectService {
   getProjectInventoryDetailsByserialNo(serialNo: string): Observable<ProjectInventoryDetail[]> {
     return this.http.get<ProjectInventoryDetail[]>(`${this.projectInventoryApiUrl}/${serialNo}`);
   }
+
+  uploadFile(formData: FormData): Observable<any> {
+   
+    return this.http.post(this.upload, formData, { responseType: 'text' });
+}
+
+downloadFile(srno: string, sNo: number,financialYear: string): Observable<Blob> {
+  return this.http.get(`${this.projectInventoryApiUrl}/download?srno=${srno}&sNo=${sNo}&financialYear=${financialYear}`, {
+    responseType: 'blob'
+  });
+}
+
+getInstallmentPlans(serialNo: string, sNo?: number, srno?: string, financialYear?: string): Observable<InstallmentPlan[]> {
+  const params = new HttpParams()
+    .set('projectId', serialNo)
+    .set('sNo', sNo?.toString() || '') // Convert to string if present
+    .set('srno', srno || '') // Pass empty string if not present
+    .set('financialYear', financialYear || ''); // Pass empty string if not present
+
+  return this.http.get<InstallmentPlan[]>(`${this.projectInventoryApiUrl}/installment-plans`, { params });
+}
+
+
   }

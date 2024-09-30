@@ -5,6 +5,7 @@ import { ActivatedRoute, Router, NavigationEnd} from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { Project } from '../../models/model-projects';
 import { RouterModule } from '@angular/router';
+import { PaymentPlanService } from '../../services/payment-plan.service';
 
 declare var bootstrap: any;
 @Component({
@@ -16,11 +17,24 @@ export class ProjectInventoryComponent implements AfterViewInit {
   projectDetails: ProjectInventoryDetail[] = [];
   groupedProjectDetails: { [blockName: string]: ProjectInventoryDetail[] } = {};
   selectedProject:  any;
-  selectedDetail: ProjectInventoryDetail | null = null;
-  
+  // selectedDetail: ProjectInventoryDetail | null = null;
+  selectedDetail: ProjectInventoryDetail = {
+   
+        serialNo: '',
+        propertyDescription: '',
+        blockName: '',
+        areaName: '',
+        status: '',
+        projectSerialNo: '',
+        salesPrice: 0,
+        sNo: 0,
+        srno: '',
+        financialYear: ''
+    };
 
   constructor(private projectService: ProjectService,
     private route: ActivatedRoute, private router: Router,
+    private paymentPlanService : PaymentPlanService
   ) { }
 
   ngAfterViewInit(): void {
@@ -42,6 +56,7 @@ export class ProjectInventoryComponent implements AfterViewInit {
   }
 
   fetchProjectDetails(): void {
+   
     if (this.selectedProject && this.selectedProject.id) {
       this.projectService.getProjectInventoryDetails(this.selectedProject.id).subscribe({
         next: (data) => {
@@ -89,6 +104,45 @@ export class ProjectInventoryComponent implements AfterViewInit {
     const modalInstance = new bootstrap.Modal(modalElement);
     modalInstance.show();
   }
+
+  download(srno: string, sNo: number,financialYear: string): void {
+    this.projectService.downloadFile(srno, sNo, financialYear).subscribe(blob => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${srno}_${sNo}_${financialYear}.file`; // Adjust the file name as needed
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }, error => {
+      console.error('File download error:', error);
+      alert('Failed to download the file.');
+    });
+  }
+  goToPaymentPlan(projectSerialNo: string | undefined): void {
+   
+
+    
+    if (this.selectedDetail) {
+      const { sNo, srno, financialYear } = this.selectedDetail;
+
+      console.log('Setting serialNo:', projectSerialNo, 'sNo:', sNo, 'srno:', srno, 'financialYear:', financialYear);
+
+      // Create URL with query parameters
+      this.paymentPlanService.setPaymentPlanDetails(projectSerialNo || '', sNo, srno, financialYear);
+
+      // Open the payment plan in a new tab without passing values in the URL
+      window.open('/payment-plan', '_blank');
+    } else {
+      console.error('selectedDetail is not defined');
+    }
+}
+  // goToPaymentPlan(projectSerialNo: string): void {
+  //   debugger
+  //   console.log('goToPaymentPlan called with serialNo:', projectSerialNo);
+  //  const url = this.router.createUrlTree(['/payment-plan', projectSerialNo]).toString();
+  //   window.open(url, '_blank');
+  // } 
 
   }
 

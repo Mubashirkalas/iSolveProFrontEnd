@@ -1,4 +1,3 @@
-/* payment-plan.component.css */
 .payment-plan-container {
   padding: 20px;
 }
@@ -20,3 +19,70 @@
 button {
   margin-top: 20px;
 }
+
+/* Responsive for small screens */
+@media (max-width: 576px) {
+  .table {
+    display: block;
+    overflow-x: auto;
+  }
+}
+
+.payment-plan-image {
+  max-width: 100%; /* Ensure it fits within the container */
+  height: auto; /* Maintain aspect ratio */
+  margin-top: 20px; /* Space above the image */
+}
+
+@media print {
+ body {
+      margin: 0;
+      padding: 0;
+      width: 210mm; /* A4 Width */
+      height: auto; /* Adjust based on content */
+  }
+
+  
+
+  .payment-plan-container {
+      padding: 20px; /* Ensure spacing is included */
+      width: 100%; /* Ensure it uses full width */
+  }
+
+  h2, h4 {
+      page-break-after: avoid; /* Prevent heading from causing page breaks */
+  }
+
+  .table {
+      width: 100%;
+      border-collapse: collapse; /* Ensure no gaps */
+      page-break-inside: auto; /* Allow table to break if necessary */
+  }
+
+  .table th, .table td {
+      border: 1px solid #ddd;
+      padding: 8px; /* Standard padding */
+      page-break-inside: avoid; /* Prevent breaking table cells */
+  }
+
+  img {
+      width: 794px; /* Width for A4 */
+      height: auto; /* Maintain aspect ratio */
+      max-width: 100%; /* Responsive */
+      display: block; /* Avoid inline spacing issues */
+      margin: 20px auto; /* Center the image with space */
+      page-break-inside: avoid; /* Prevent image from breaking */
+  }
+
+  /* Hide non-essential elements during printing */
+  .print-button {
+      display: none; /* Hide print button */
+  }
+
+  /* Hide alerts and loading spinners if they exist */
+  .alert,
+  .spinner-border {
+      display: none; /* Hide non-essential elements */
+  }
+}
+

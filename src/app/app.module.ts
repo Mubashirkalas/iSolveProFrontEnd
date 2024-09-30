@@ -32,6 +32,17 @@ import { PaymentPlanComponent } from './components/payment-plan/payment-plan.com
 import { ProfileSettingsComponent } from './components/profile-settings/profile-settings.component';
 import { EditCompanyProfileComponent } from './components/edit-company-profile/edit-company-profile.component';
 import { ProjectMaterialsComponent } from './components/project-materials/project-materials.component';
+import { UpdatePasswordComponent } from './components/update-password/update-password.component';
+import { EventRequestComponent } from './components/event-request/event-request.component';
+import { EventReportTableComponent } from './components/event-report-table/event-report-table.component';
+import { AgGridAngular} from 'ag-grid-angular';
+import { DataTablesModule } from 'angular-datatables';
+
+import DataTable from 'datatables.net-dt';
+import { BdmChangeRequestComponent } from './components/bdm-change-request/bdm-change-request.component';
+import { FloorPlanComponent } from './components/floor-plan/floor-plan.component';
+import { ComissionsComponent } from './components/comissions/comissions.component';
+import { BookingsComponent } from './components/bookings/bookings.component';
 
 
 
@@ -64,6 +75,14 @@ import { ProjectMaterialsComponent } from './components/project-materials/projec
          ProfileSettingsComponent,
          EditCompanyProfileComponent,
          ProjectMaterialsComponent,
+         UpdatePasswordComponent,
+         EventRequestComponent,
+         EventReportTableComponent,
+         BdmChangeRequestComponent,
+         FloorPlanComponent,
+         ComissionsComponent,
+         BookingsComponent
+    
    
    
   ],
@@ -76,7 +95,10 @@ import { ProjectMaterialsComponent } from './components/project-materials/projec
     HttpClientModule,
     NgxIntlTelInputModule,
     NgxMaskDirective,
-    NgxMaskPipe
+    NgxMaskPipe,
+    AgGridAngular
+  
+    
    
     
     

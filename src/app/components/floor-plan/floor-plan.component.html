@@ -1,0 +1,66 @@
+<div class="main-content app-content">
+    <div class="container-fluid">
+        
+
+        
+        
+                 <!-- Page Header
+                 <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
+                    <div>
+                        <h1 class="page-title fw-semibold fs-20 mt-3 mb-0">Maintenance Request Details</h1> <br />
+                        <button (click)="onBtExport()" class="btn btn-primary mt-3" type="button">
+                            <i class="mx-1 align-middle"></i>Export File
+                                   </button>
+                    </div>
+                    <div class="ms-auto pageheader-btn"> <br /><br />
+                        <button class="btn btn-primary mt-5 " type="button" routerLink="/event-request">
+                            <i class="fe fe-plus mx-1 align-middle"></i> Add Event Report
+                        </button>
+        
+                    </div>
+        
+                </div> -->
+                <div class="container">
+                    <div class="example-header mt-3 mb-3">
+                      <span><b> Search : </b></span>
+                      <input
+                        type="text"
+                        id="filter-text-box"
+                        style="height: 30px; padding: 4px;"
+                        class="form-control"
+                        placeholder="Filter..."
+                        (input)="onFilterTextBoxChanged()"/>
+                    </div>
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="grid-wrapper">
+                          <ag-grid-angular 
+                          style="width: 100%; height: 100%;" 
+                          class="ag-theme-quartz"
+                          [rowData]="floorPlanDetails"
+                          [columnDefs]="colDefs"
+                          [defaultColDef]="defaultColDef"
+                          (gridReady)="onGridReady($event)"
+                          [pagination]="true"
+                          [paginationPageSize]="10"
+                          [domLayout]="'autoHeight'"
+                          (gridReady)="onGridReady($event)"
+                          (firstDataRendered)="onFirstDataRendered($event)"
+                          [suppressHorizontalScroll]="true"
+                          >
+                          
+                          </ag-grid-angular>
+                          
+                          
+                        </div>
+                       
+                      </div>
+                    </div>
+                  </div>
+         </div>
+        
+            </div>
+        
+        
+
+

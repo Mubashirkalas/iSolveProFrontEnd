@@ -1,0 +1,77 @@
+<div class="main-content app-content">
+    <div class="container-fluid">
+      <!-- Page Header -->
+      <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
+        <div class="ms-auto pageheader-btn"> <br /><br />
+          <button class="btn btn-primary mt-5" type="button" (click)="openChangeRequestModal()">
+            <i class="fe fe-plus mx-1 align-middle"></i> Change Request
+          </button>
+        </div>
+      </div>
+  
+      <div class="container">
+        <div class="example-header mt-3 mb-3">
+          <span><b>Search:</b></span>
+          <input
+            type="text"
+            id="filter-text-box"
+            style="height: 30px; padding: 4px;"
+            class="form-control"
+            placeholder="Filter..."
+            (input)="onFilterTextBoxChanged()"/>
+        </div>
+  
+        <div class="row">
+          <div class="col-12">
+            <div class="grid-wrapper">
+              <ag-grid-angular 
+                style="width: 100%; height: 100%;" 
+                class="ag-theme-quartz"
+                [rowData]="bdmChangeRequests"
+                [columnDefs]="colDefs"
+                [defaultColDef]="defaultColDef"
+                (gridReady)="onGridReady($event)"
+                [pagination]="true"
+                [paginationPageSize]="10"
+                [domLayout]="'autoHeight'"
+                (firstDataRendered)="onFirstDataRendered($event)"
+                [suppressHorizontalScroll]="true">
+              </ag-grid-angular>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+     <!-- Bootstrap Modal -->
+  <div class="modal fade" id="changeRequestModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalLabel">Add BDM Change Request</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="bdm-select" class="form-label">Select BDM</label>
+              <select id="bdm-select" class="form-select" [(ngModel)]="selectedBdm" name="bdmSelect">
+                <option value="" disabled selected>Select BDM</option>
+                <option *ngFor="let partner of businessPartners" [value]="partner.businessPartnersName" >{{  partner.businessPartnersName }}</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="reason" class="form-label">Reason</label>
+              <textarea id="reason" class="form-control" [(ngModel)]="reason" name="reason"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" (click)="addRequest()" [disabled]="isLoading">Add Request</button>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  

@@ -5,5 +5,8 @@ export interface ProjectInventoryDetail {
     areaName?: string;               
     status?: string;                  
     projectSerialNo?: string;     
-    salesPrice?: number;    
+    salesPrice?: number;  
+    sNo?: number;  
+    srno?: string;
+    financialYear?: string;
 }
