@@ -12,7 +12,7 @@ import { SubCompanyComponent } from './components/sub-company/sub-company.compon
 import { AnnouncemnetComponent } from './components/announcemnet/announcemnet.component';
 import { AssignTaskComponent } from './components/assign-task/assign-task.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClient, HttpClientModule,withFetch} from '@angular/common/http';
+import { HttpClient, HttpClientModule,withFetch,HTTP_INTERCEPTORS} from '@angular/common/http';
 import { BlockComponent } from './components/block/block.component';
 import { FloorComponent } from './components/floor/floor.component';
 import { ProjectComponent } from './components/project/project.component';
@@ -43,6 +43,8 @@ import { BdmChangeRequestComponent } from './components/bdm-change-request/bdm-c
 import { FloorPlanComponent } from './components/floor-plan/floor-plan.component';
 import { ComissionsComponent } from './components/comissions/comissions.component';
 import { BookingsComponent } from './components/bookings/bookings.component';
+import { JwtInterceptor } from './interceptors/jwt.interceptor';
+
 
 
 
@@ -110,6 +112,7 @@ import { BookingsComponent } from './components/bookings/bookings.component';
     provideClientHydration(),
     provideAnimationsAsync(),
     provideNgxMask(),
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
    
     
   ],
