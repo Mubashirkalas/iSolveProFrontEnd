@@ -9,7 +9,7 @@ import { Commissions } from '../models/model-commissions';
 })
 export class BusinessPartnerService {
 
-  private apiUrl = 'https://localhost:7026/api/BusinessPartner'
+  private apiUrl = 'http://173.212.251.175:8085/api/BusinessPartner'
 
   constructor(private http: HttpClient) {}
 

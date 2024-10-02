@@ -8,7 +8,7 @@ import { Realtor } from '../models/model-realtor';
 })
 export class RealtorService {
 
-  private apiUrl = 'https://localhost:7026/api/Realtor';
+  private apiUrl = 'http://173.212.251.175:8085/api/Realtor';
 
   constructor(private http: HttpClient ) { }
 

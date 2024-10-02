@@ -9,8 +9,8 @@ import { tap } from 'rxjs';
 })
 export class AuthService {
 
-  private apiUrl ='https://localhost:7026/api/BusinessPartner/login';
-  private updatePasswordUrl = 'https://localhost:7026/api/BusinessPartner/update-password';
+  private apiUrl ='http://173.212.251.175:8085/api/BusinessPartner/login';
+  private updatePasswordUrl = 'http://173.212.251.175:8085/api/BusinessPartner/update-password';
   
   constructor(private http: HttpClient) { }
 

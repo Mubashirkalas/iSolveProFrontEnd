@@ -11,9 +11,9 @@ import { InstallmentPlan } from '../models/model-installments';
   providedIn: 'root'
 })
 export class ProjectService {
-  private projectsApiUrl  = 'https://localhost:7026/api/Projects'
-  private projectInventoryApiUrl = 'https://localhost:7026/api/ProjectInventory';
-  private upload = 'https://localhost:7026/api/ProjectInventory/upload';
+  private projectsApiUrl  = 'http://173.212.251.175:8085/api/Projects'
+  private projectInventoryApiUrl = 'http://173.212.251.175:8085/api/ProjectInventory';
+  private upload = 'http://173.212.251.175:8085/api/ProjectInventory/upload';
  
   private selectedProjectSubject = new BehaviorSubject<any>(null);
   selectedProject$ = this.selectedProjectSubject.asObservable();

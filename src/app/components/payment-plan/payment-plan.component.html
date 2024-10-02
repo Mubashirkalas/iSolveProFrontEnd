@@ -40,7 +40,7 @@
   <div *ngIf="installmentPlans.length > 0" class="text-center">
       <h4 class="text-center">Floor Plan Image</h4>
       <ng-container *ngIf="installmentPlans[0].fileUpload; else noImage">
-          <img [src]="'https://localhost:7026/' + installmentPlans[0].fileUpload" alt="Installment Plan Image" class="payment-plan-image" />
+          <img [src]="'http://173.212.251.175:8085/' + installmentPlans[0].fileUpload" alt="Installment Plan Image" class="payment-plan-image" />
       </ng-container>
       <ng-template #noImage>
           <p>No floor plan image available</p>

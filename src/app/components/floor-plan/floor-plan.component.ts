@@ -18,16 +18,16 @@ export class FloorPlanComponent {
  
   
   colDefs: ColDef[] = [
-    { headerName: "Serial No", field: "serialNo", headerClass: 'custom-header' },
+    // { headerName: "Serial No", field: "serialNo", headerClass: 'custom-header' },
     { headerName: "Property Description", field: "propertyDescription", headerClass: 'custom-header' },
     { headerName: "Property Details Title", field: "propertyDetailsTitle", headerClass: 'custom-header' },
     { headerName: "Block Name", field: "blockName", headerClass: 'custom-header' },
     { headerName: "Area Name", field: "areaName", headerClass: 'custom-header' },
     { headerName: "Cost Per Property", field: "costPerProperty", headerClass: 'custom-header' },
-    { headerName: "Srno", field: "srno", headerClass: 'custom-header' },
+    // { headerName: "Srno", field: "srno", headerClass: 'custom-header' },
     { headerName: "Financial Year", field: "financialYear", headerClass: 'custom-header' },
     { headerName: "Project Name", field: "projectName", headerClass: 'custom-header' },
-    { headerName: "SNo", field: "sNo", headerClass: 'custom-header' },
+    // { headerName: "SNo", field: "sNo", headerClass: 'custom-header' },
     { headerName: "Status", field: "status", headerClass: 'custom-header' },
     { headerName: "Sales Price", field: "salesPrice", headerClass: 'custom-header' },
    

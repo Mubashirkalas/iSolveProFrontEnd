@@ -8,8 +8,8 @@ import { ProjectInventoryDetail } from '../models/model-project-inventory';
   providedIn: 'root'
 })
 export class ProjectService {
-  private projectsApiUrl  = 'https://localhost:7026/api/Projects'
-  private projectInventoryApiUrl = 'https://localhost:7026/api/ProjectInventory';
+  private projectsApiUrl  = 'http://173.212.251.175:8085/api/Projects'
+  private projectInventoryApiUrl = 'http://173.212.251.175:8085/api/ProjectInventory';
 
 
   constructor(private http: HttpClient) { }

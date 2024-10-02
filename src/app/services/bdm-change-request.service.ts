@@ -7,7 +7,7 @@ import { BDMChangeRequest } from '../models/model-bdm-change-request';
 })
 export class BdmChangeRequestService {
 
-  private apiUrl = 'https://localhost:7026/api/BDMChangeRequest'; // Replace with your actual API URL
+  private apiUrl = 'http://173.212.251.175:8085/api/BDMChangeRequest'; // Replace with your actual API URL
 
   constructor(private http: HttpClient) { }
 
