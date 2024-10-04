@@ -30,4 +30,9 @@ export class BdmChangeRequestService {
    deleteRequest(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+
+  getBdmChangeRequestById(id: number): Observable<BDMChangeRequest> {
+    return this.http.get<BDMChangeRequest>(`${this.apiUrl}/${id}`);
+  }
+  
 }

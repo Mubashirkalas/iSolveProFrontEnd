@@ -124,8 +124,8 @@ markAllAsTouched(form: NgForm) {
     });
   }
 
-  updateRealtor(id: number): void {
-    this.realtorService.updateRealtor(id, this.model).subscribe({
+  updateRealtor(id: number,status:string=""): void {
+    this.realtorService.updateRealtor(id,status, this.model).subscribe({
         next: (response) => {
             console.log('Realtor updated successfully:', response);
             // Add any additional logic you need to handle after updating the realtor

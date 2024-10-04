@@ -5,7 +5,8 @@
             <div class="row">
               <div *ngFor="let project of projects" class="col-md-4 mb-3">
                 <div class="card">
-                  <img [src]="'assets/pics/hhhhhh.jpg'" class="card-img-top" alt="Project Image">
+                  <img [src]="project.projectPhotoFilePath ? getFullFilePath(project.projectPhotoFilePath) : 'assets/default-image.jpg'" class="card-img-top" alt="{{ project.projectName }} Image">
+
                   <div class="card-body">
                     <h5 class="card-title">{{ project.projectName }} By iSolve</h5>
                    

@@ -1,13 +1,14 @@
 export interface Realtor {
-    id: number;
-    RealtorName: string;
-    ContactNo: string;
+     serialNo: number;
+    realtorName: string;
+    contactNo: string;
     cnic: string;
     officeAddress: string;
     companyName: string;
     city: string;
-    AgentId: string;
+    agentId: string;
     CnicImage: File | null;
     OfficeImage: File | null;
     userType: string;
+    approved:string;
   }

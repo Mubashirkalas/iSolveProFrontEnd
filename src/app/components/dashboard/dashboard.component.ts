@@ -28,4 +28,10 @@ export class DashboardComponent implements AfterViewInit {
     this.projectService.setSelectedProject(selectedProject);
     this.router.navigate(['/projectDetails']);
   }
+
+  getFullFilePath(filePath: string): string {
+    return `http://173.212.251.175:8085/${filePath}`;
+}
+
+
 }

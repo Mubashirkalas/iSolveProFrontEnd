@@ -1,72 +1,104 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../../services/project-inventory.service';
+import { ProjectmaterialService } from '../../services/project.service';
 import { Project } from '../../models/model-projects';
-import { MarketingMaterials } from '../../models/model-project-material';
+import { MarketingMaterial } from '../../models/model-marketing-material';
+import { MarketingMMaterial } from '../../models/model-marketing-material';
+
 
 @Component({
   selector: 'app-project-materials',
   templateUrl: './project-materials.component.html',
-  styleUrl: './project-materials.component.css'
+  styleUrls: ['./project-materials.component.css'] 
 })
-export class ProjectMaterialsComponent {
+export class ProjectMaterialsComponent implements OnInit{
 
   selectedProject: Project | null = null;
-  marketingMaterials: { name: string; link: string; type: string }[] = [];
+  marketingMaterials: MarketingMaterial = {
+    serialNo: 0, // Initialize with a default value
+    eBrochure: null,
+    photos: null,
+    floorplans: null,
+    projectphoto: null,
+    videoLink: '',
+    eBrochureFilePath: '',
+    photosZipFilePath: '',
+ floorplansZipFilePath: '',
+ projectphotoFilePath: ''
+  };
 
-  constructor(private projectService: ProjectService) {}
+  fetchedMarketingMaterials: MarketingMaterial | null = null;
+
+
+
+  constructor(private projectMaterialService: ProjectmaterialService, private projectService:ProjectService) {}
 
   ngOnInit(): void {
     this.projectService.selectedProject$.subscribe(project => {
       this.selectedProject = project;
       if (project) {
-        this.loadMarketingMaterials();
-      } else {
-        this.marketingMaterials = [];
+        this.marketingMaterials.serialNo = project.id;
+        this.loadMarketingMaterials(project.id);
       }
     });
   }
 
-  loadMarketingMaterials(): void {
-    // Example static data
-    this.marketingMaterials = [
-      { name: 'Project Brochure', link: 'assets/brochure.pdf', type: 'brochure' },
-      { name: 'Project Image', link: 'assets/images.zip', type: 'image' },
-      { name: 'Project Video', link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', type: 'video' },
-      { name: 'Project Floorplan', link: 'assets/floorplans.zip', type: 'floorplan' }
-    ];
-  }
-  onFileChange(event: Event): void {
+  
+  onFileChange(event: Event, type: 'eBrochure' | 'photos' | 'floorplans'|'projectphoto'): void {
     const input = event.target as HTMLInputElement;
-    if (input.files) {
-      Array.from(input.files).forEach(file => {
-        const reader = new FileReader();
-        reader.onload = () => {
-          const material = {
-            name: file.name,
-            link: reader.result as string,
-            type: this.getFileType(file)
-          };
-          this.marketingMaterials.push(material);
-        };
-        reader.readAsDataURL(file);
-      });
+    if (input.files && input.files.length) {
+      const file = input.files[0];
+      if (type === 'eBrochure') {
+        this.marketingMaterials.eBrochure = file;
+      } else if (type === 'photos') {
+        this.marketingMaterials.photos = file;
+      } else if (type === 'floorplans') {
+        this.marketingMaterials.floorplans = file;
+      }
+      else if (type === 'projectphoto'){
+        this.marketingMaterials.projectphoto = file;
+      }
     }
   }
+
+
 
   uploadFiles(): void {
-    // Handle file upload logic if needed (e.g., saving to local storage, etc.)
-    console.log('Files uploaded:', this.marketingMaterials);
+    this.projectMaterialService.uploadMarketingMaterials(this.marketingMaterials).subscribe(
+      response => {
+        console.log('Upload successful:', response);
+        this.loadMarketingMaterials(this.marketingMaterials.serialNo);
+      },
+      error => {
+        console.error('Upload failed:', error);
+      }
+    );
   }
 
-  getFileType(file: File): string {
-    if (file.type.startsWith('image/')) {
-      return 'image';
-    } else if (file.type.startsWith('video/')) {
-      return 'video';
-    } else if (file.type === 'application/pdf') {
-      return 'link'; // PDF as a link for download
+
+  loadMarketingMaterials(serialNo: number): void {
+    this.projectMaterialService.getProjectBySerialNumber(serialNo).subscribe(
+      materials => {
+        this.fetchedMarketingMaterials = materials;
+      },
+      error => {
+        console.error('Error fetching marketing materials:', error);
+      }
+    );
+  }
+
+  getFileType(filePath: string): string {
+    const extension = filePath.split('.').pop();
+    if (extension === 'pdf') {
+      return 'brochure';
+    } else if (extension === 'zip') {
+      return 'zip';
     } else {
-      return 'link'; // Default to link for other types
+      return 'link';
     }
+  }
+
+  getFullFilePath(filePath: string): string {
+    return `http://173.212.251.175:8085/${filePath}`;
   }
 }

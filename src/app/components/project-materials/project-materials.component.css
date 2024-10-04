@@ -1,49 +1,115 @@
 /* Container for all marketing materials */
 .materials-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px; /* Spacing between blocks */
-    justify-content: center; /* Center the blocks horizontally */
-    margin: 20px 0;
-  }
-  
-  /* Styling for each material block */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px; /* Increased spacing for a cleaner layout */
+  justify-content: center; /* Center the blocks horizontally */
+  margin: 30px 0; /* Top and bottom margins */
+}
+
+/* Styling for each material block */
+.material-box {
+  flex: 1 1 calc(25% - 30px); /* Adjust the width to show 4 blocks in a row with larger gaps */
+  box-sizing: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.1); /* Subtle border */
+  border-radius: 12px; /* More rounded corners for a modern look */
+  padding: 20px;
+  text-align: center;
+  background-color: #ffffff; /* Clean white background */
+  transition: box-shadow 0.3s, transform 0.3s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Light initial shadow */
+}
+
+.material-box:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Larger shadow on hover */
+  transform: translateY(-5px); /* Lift slightly on hover */
+}
+
+/* Styling for the material content inside each block */
+.material-content {
+  margin: 15px 0; /* Extra spacing between content */
+}
+
+/* Styling for download links */
+.material-content a {
+  color: #2c3e50; /* Darker shade for the text */
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500; /* Slightly bold text */
+}
+
+.material-content a:hover {
+  text-decoration: underline;
+  color: #3498db; /* Blue shade on hover */
+}
+
+/* Styling for headers */
+h1 {
+  font-size: 32px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 30px;
+}
+
+/* Styling for the form inputs */
+form {
+  margin-top: 40px; /* Separate form from the list */
+}
+
+form label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 8px;
+}
+
+form input[type="file"], form input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  background-color: #f5f5f5;
+  margin-bottom: 20px;
+  transition: border-color 0.3s;
+}
+
+form input[type="file"]:focus, form input[type="text"]:focus {
+  border-color: #3498db;
+  outline: none;
+}
+
+/* Styling for the submit button */
+button[type="submit"] {
+  padding: 12px 30px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #3498db;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+  background-color: #2980b9;
+}
+
+/* Mobile Responsiveness */
+@media screen and (max-width: 768px) {
   .material-box {
-    flex: 1 1 calc(25% - 20px); /* Adjust the width to show 4 blocks in a row with spacing */
-    box-sizing: border-box;
-    border: 1px solid #ddd; /* Border around each block */
-    border-radius: 8px; /* Rounded corners */
-    padding: 15px;
-    text-align: center;
-    background-color: #f9f9f9;
-    transition: box-shadow 0.3s, transform 0.3s;
+    flex: 1 1 calc(50% - 20px); /* Adjust to 2 blocks per row on smaller screens */
   }
-  
-  .material-box:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow on hover */
-    transform: scale(1.02); /* Slightly scale up on hover */
+}
+
+@media screen and (max-width: 480px) {
+  .material-box {
+    flex: 1 1 100%; /* Stack blocks vertically on small screens */
   }
-  
-  /* Styling for images inside the blocks */
-  .material-image {
-    max-width: 100%;
-    height: auto;
-    border-radius: 4px; /* Rounded corners for images */
+
+  button[type="submit"] {
+    width: 100%; /* Full-width button on small screens */
   }
-  
-  /* Common styling for the content inside each block */
-  .material-content {
-    margin: 10px 0;
-  }
-  
-  .material-content a {
-    color: #333;
-    text-decoration: none;
-    font-size: 16px;
-  }
-  
-  .material-content a:hover {
-    text-decoration: underline;
-    color: #007bff; /* Change color on hover */
-  }
-  
+}

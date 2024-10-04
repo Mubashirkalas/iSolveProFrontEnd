@@ -21,6 +21,7 @@ import { BdmChangeRequestComponent } from './components/bdm-change-request/bdm-c
 import { FloorPlanComponent } from './components/floor-plan/floor-plan.component';
 import { ComissionsComponent } from './components/comissions/comissions.component';
 import { BookingsComponent } from './components/bookings/bookings.component';
+import { RequestsComponent } from './components/requests/requests.component';
 
 
 export const routes: Routes = [
@@ -45,6 +46,7 @@ export const routes: Routes = [
   {path: 'floor-plan', component:FloorPlanComponent, canActivate: [AuthGuard]},
   {path: 'comissions', component: ComissionsComponent, canActivate:[AuthGuard]},
   {path: 'bookings', component:BookingsComponent, canActivate:[AuthGuard]},
+  {path: 'requests', component:RequestsComponent, canActivate:[AuthGuard]},
  
 
   { path: '**', redirectTo: '/login' } 

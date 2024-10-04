@@ -1,0 +1,133 @@
+<div class="main-content app-content">
+    <div class="container-fluid py-5">
+        <div class="container">
+            <h2 class="mb-4 text-center">Requests Overview</h2>
+
+            <!-- BDM Change Requests Section -->
+            <div class="card mb-5 shadow">
+                <div class="card-header bg-primary ">
+                    <h3 class="card-title">BDM Change Requests</h3>
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Requested BDM</th>
+                                <th>Reason</th>
+                                <th>Requested On</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let request of bdmChangeRequests">
+                                <td>{{ request.id }}</td>
+                                <td>{{ request.name }}</td>
+                                <td>{{ request.requestedBDM }}</td>
+                                <td>{{ request.reason }}</td>
+                                <td>{{ request.requestedOn }}</td>
+                                <td>
+                                    <span [ngClass]="{'badge bg-warning': request.status === 'pending', 'badge bg-success': request.status === 'approved', 'badge bg-danger': request.status === 'declined'}">{{ request.status }}</span>
+                                </td>
+                                <td>
+                                    <button (click)="updateBdmChangeRequestStatus(request.id, 'approved')" class="btn btn-sm btn-success me-2">Approve</button>
+                                    <button (click)="updateBdmChangeRequestStatus(request.id, 'declined')" class="btn btn-sm btn-danger me-2">Decline</button>
+                                    <button (click)="deleteBDMChangeRequest(request.id)" class="btn btn-sm btn-warning">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Event Reports Section -->
+            <div class="card mb-5 shadow">
+                <div class="card-header bg-primary ">
+                    <h3 class="card-title">Event Reports</h3>
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Event ID</th>
+                                <th>Title</th>
+                                <th>Date</th>
+                                <th>City</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let event of eventReports">
+                                <td>{{ event.eventId }}</td>
+                                <td>{{ event.eventTitle }}</td>
+                                <td>{{ event.dateOfEvent }}</td>
+                                <td>{{ event.city }}</td>
+                                <td>
+                                    <span [ngClass]="{
+                                        'badge bg-warning': event.status === null || event.status === '0'|| event.status === '',
+                                        'badge bg-success': event.status === 'approved',
+                                        'badge bg-danger': event.status === 'declined'
+                                    }">
+                                        {{ event.status === null || event.status === '0' || event.status === ''  ? 'Pending' : event.status }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <button (click)="updateEventReportStatus(event.eventId, 'approved')" class="btn btn-sm btn-success me-2">Approve</button>
+                                    <button (click)="updateEventReportStatus(event.eventId, 'declined')" class="btn btn-sm btn-danger me-2">Decline</button>
+                                    <button (click)="deleteEventReport(event.eventId)" class="btn btn-sm btn-warning">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Realtors Section -->
+            <div class="card shadow">
+                <div class="card-header bg-primary ">
+                    <h3 class="card-title">Realtors</h3>
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover">
+                        <thead class="table-dark">
+                            <tr>
+                                
+                                <th>Name</th>
+                                <th>Office Address</th>
+                                <th>Contact No</th>
+                                <th>Company Name</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let realtor of realtors">
+                                <td>{{ realtor.realtorName }}</td>
+                                <td>{{ realtor.officeAddress }}</td>
+                                <td>{{ realtor.contactNo }}</td>
+                                <td>{{ realtor.companyName }}</td>
+                                <td>
+                                    <span [ngClass]="{
+                                        'badge bg-warning': !isRealtorApproved(realtor.approved), 
+                                        'badge bg-success': isRealtorApproved(realtor.approved)
+                                    }">
+                                        {{ isRealtorApproved(realtor.approved) ? 'Approved' : 'Pending' }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <button (click)="updateRealtorStatus(realtor.serialNo, 'True')" class="btn btn-sm btn-success me-2">Approve</button>
+                                    <button (click)="updateRealtorStatus(realtor.serialNo, 'False')" class="btn btn-sm btn-danger me-2">Decline</button>
+                                    <button (click)="deleteRealtor(realtor.serialNo)" class="btn btn-sm btn-warning">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

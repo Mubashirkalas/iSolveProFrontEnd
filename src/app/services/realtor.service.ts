@@ -8,12 +8,13 @@ import { Realtor } from '../models/model-realtor';
 })
 export class RealtorService {
 
-  private apiUrl = 'http://173.212.251.175:8085/api/Realtor';
+  private apiUrl = 'http://173.212.251.175:8085/api/Realtor/realtors';
+  private updateapiUrl = 'http://173.212.251.175:8085/api/Realtor/UpdateRealtor';
 
   constructor(private http: HttpClient ) { }
 
   addRealtor(data: FormData): Observable<any>{
-    return this.http.post<any>(`${this.apiUrl}/realtors`, data);
+    return this.http.post<any>(`${this.apiUrl}`, data);
 
   }
 
@@ -25,8 +26,8 @@ export class RealtorService {
     return this.http.get<any[]>(this.apiUrl);
   }
 
-  updateRealtor(id: number, updatedRealtor: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${id}`, updatedRealtor);
+  updateRealtor(id: number,status:string, updatedRealtor: any): Observable<any> {
+    return this.http.put(`${this.updateapiUrl}?id=${id}&status=${status}`, updatedRealtor);
   }
 
   deleteRealtor(id: number): Observable<any> {

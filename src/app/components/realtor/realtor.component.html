@@ -181,7 +181,7 @@
                   name="mgcAgent"
                  #mgcAgent="ngModel"
                 >
-                  <option value="" disabled selected>Select MGC Agent</option>
+                  <option value="" disabled selected>Select Agent</option>
                   <option *ngFor="let partner of businessPartners" [value]="partner.businessPartnersCode">
                     {{ partner.businessPartnersName }}
                   </option>
@@ -190,7 +190,7 @@
                   *ngIf="mgcAgent.invalid &&  (mgcAgent.dirty || mgcAgent.touched)"
                   class="alert-danger"
                 >
-                  <div *ngIf="mgcAgent.errors?.['required']">MGC Agent is required.</div>
+                  <div *ngIf="mgcAgent.errors?.['required']"> Agent is required.</div>
                 </div>
               </div>
             </div>

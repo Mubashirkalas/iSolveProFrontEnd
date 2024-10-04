@@ -3,22 +3,68 @@
         <div *ngIf="selectedProject; else noProject">
             <h1 class="text-center" >Marketing Material for {{ selectedProject.projectName }}</h1>
           
-            <ul *ngIf="marketingMaterials.length > 0; else noMaterials"  class="materials-container">
-              <li *ngFor="let material of marketingMaterials" class="material-box">
-                <div *ngIf="material.type === 'brochure'" class="material-content">
-                  <a [href]="material.link"  download>{{ material.name }}</a>
-                </div>
-                <div *ngIf="material.type === 'image'" class="material-content">
-                    <a [href]="material.link" download>{{ material.name }}</a>
-                  </div>
-                <div *ngIf="material.type === 'video'" class="material-content">
-                    <a [href]="material.link" target="_blank" rel="noopener noreferrer">{{ material.name }}</a>
-                  </div>
-                  <div *ngIf="material.type === 'floorplan'" class="material-content">
-                    <a [href]="material.link" download>{{ material.name }}</a>
-                  </div>
-              </li>
-            </ul>
+     
+      <!-- Display Marketing Materials -->
+      <ul *ngIf="fetchedMarketingMaterials" class="materials-container">
+        <li *ngIf="fetchedMarketingMaterials.eBrochureFilePath" class="material-box">
+          <div>
+            <a [href]="getFullFilePath(fetchedMarketingMaterials.eBrochureFilePath)" download>E-Brochure</a>
+          </div>
+        </li>
+        <li *ngIf="fetchedMarketingMaterials.photosZipFilePath" class="material-box">
+          <div>
+            <a [href]="getFullFilePath(fetchedMarketingMaterials.photosZipFilePath)" download>Photos</a>
+          </div>
+        </li>
+        <li *ngIf="fetchedMarketingMaterials.floorplansZipFilePath" class="material-box">
+          <div>
+            <a [href]="getFullFilePath(fetchedMarketingMaterials.floorplansZipFilePath)" download>Floorplans</a>
+          </div>
+        </li>
+        <li *ngIf="fetchedMarketingMaterials.videoLink" class="material-box">
+          <div>
+            <a [href]="fetchedMarketingMaterials.videoLink" target="_blank" rel="noopener noreferrer">Video</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+     <!-- Upload Form -->
+     <form (ngSubmit)="uploadFiles()">
+      <div>
+        <label for="eBrochureFile">E-Brochure (PDF):</label>
+        <input type="file" id="eBrochureFile" (change)="onFileChange($event, 'eBrochure')" accept=".pdf" required>
+      </div>
+
+      <div>
+        <label for="photosZipFile">Photos (ZIP):</label>
+        <input type="file" id="photosZipFile" (change)="onFileChange($event, 'photos')" accept=".zip" required>
+      </div>
+
+      <div>
+        <label for="floorplansZipFile">Floorplans (ZIP):</label>
+        <input type="file" id="floorplansZipFile" (change)="onFileChange($event, 'floorplans')" accept=".zip" required>
+      </div>
+
+      <div>
+        <label for="projectPhotoFile">Upload Project Photo:</label>
+        <input 
+            type="file" 
+            id="projectPhotoFile" 
+            (change)="onFileChange($event, 'projectphoto')" 
+            accept="image/*" 
+            required
+        >
+    </div>
+
+      <div>
+        <label for="videoLink">YouTube Video Link:</label>
+        <input type="text" id="videoLink" [(ngModel)]="marketingMaterials.videoLink" name="videoLink" required>
+      </div>
+
+      <button type="submit">Upload</button>
+    </form>
+
           
             <ng-template #noMaterials>
               <h6>No marketing materials available for this project.</h6>
@@ -31,4 +77,5 @@
           
   
    </div>
-  </div>
+
+

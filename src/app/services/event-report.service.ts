@@ -20,4 +20,19 @@ export class EventReportService {
     return this.http.get<EventReport[]>(this.apiUrl);
   }
 
+    // Update an existing event report
+    updateEventReport(eventReport: EventReport): Observable<void> {
+      return this.http.put<void>(`${this.apiUrl}/${eventReport.eventId}`, eventReport);
+    }
+
+    getEventReportById(id: number): Observable<EventReport> {
+      return this.http.get<EventReport>(`${this.apiUrl}/${id}`);
+    }
+    
+  
+    // Delete an event report by ID
+    deleteEventReport(eventId: number): Observable<void> {
+      return this.http.delete<void>(`${this.apiUrl}/${eventId}`);
+    }
+
 }

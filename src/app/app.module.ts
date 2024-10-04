@@ -40,6 +40,7 @@ import { FloorPlanComponent } from './components/floor-plan/floor-plan.component
 import { ComissionsComponent } from './components/comissions/comissions.component';
 import { BookingsComponent } from './components/bookings/bookings.component';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
+import { RequestsComponent } from './components/requests/requests.component';
 
 
 
@@ -75,7 +76,8 @@ import { JwtInterceptor } from './interceptors/jwt.interceptor';
          BdmChangeRequestComponent,
          FloorPlanComponent,
          ComissionsComponent,
-         BookingsComponent
+         BookingsComponent,
+         RequestsComponent
     
    
    
