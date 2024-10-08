@@ -1,4 +1,4 @@
-import { Component ,AfterViewInit } from '@angular/core';
+import { Component ,AfterViewInit, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgZone } from '@angular/core';
 import { ProjectService } from '../services/project-inventory.service';
@@ -11,14 +11,20 @@ import { AuthService } from '../services/auth.service';
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent implements AfterViewInit{
+export class HeaderComponent implements AfterViewInit,OnInit{
   projects: Project[] = [];
   showHeader: boolean = true;
+  isSuperAdmin: boolean = false;
   
   selectedProjectInventoryDetails: ProjectInventoryDetail | null = null;
   constructor(private router:Router,private zone: NgZone, private projectService:ProjectService,
     private authService: AuthService,
   ){}
+
+  ngOnInit(): void {
+    const role = this.authService.getpartyType();
+    this.isSuperAdmin = role === 'Super Admin';
+  }
   gotopage(){
     this.zone.run(() => {
       console.log('Button clicked inside Angular zone!');

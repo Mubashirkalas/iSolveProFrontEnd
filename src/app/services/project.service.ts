@@ -9,10 +9,10 @@ import { MarketingMaterial } from '../models/model-marketing-material';
   providedIn: 'root'
 })
 export class ProjectmaterialService {
-  private projectsApiUrl  = 'http://173.212.251.175:8085/api/Projects'
-  private projectInventoryApiUrl = 'http://173.212.251.175:8085/api/ProjectInventory';
-  private apiUrl = 'http://173.212.251.175:8085/api/Projects/upload-materials';
-  private url = 'http://173.212.251.175:8085/api/Projects';
+  private projectsApiUrl  = 'https://localhost:7026/api/Projects'
+  private projectInventoryApiUrl = 'https://localhost:7026/api/ProjectInventory';
+  private apiUrl = 'https://localhost:7026/api/Projects/upload-materials';
+  private url = 'https://localhost:7026/api/Projects';
 
 
   constructor(private http: HttpClient) { }

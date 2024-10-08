@@ -1828,14 +1828,14 @@
         </li>
         <!-- End::slide -->
         <!-- Start::slide -->
-        <li class="slide">
+        <li *ngIf="isSuperAdmin" class="slide">
           <a id="froms" routerLink="/floor-plan" class="side-menu__item">
             <i class="fas fa-building side-menu__icon"></i>
             <span class="side-menu__label">Floor Plan</span>
           </a>
         </li>
        
-        <li class="slide">
+        <li *ngIf="isSuperAdmin" class="slide">
           <a id="froms" routerLink="/requests" class="side-menu__item">
             <i class="fas fa-building side-menu__icon"></i>
             <span class="side-menu__label">Requests</span>

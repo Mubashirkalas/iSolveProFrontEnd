@@ -10,7 +10,7 @@ import { AuthService } from './auth.service';
 })
 export class BookingsService {
 
-  private apiUrl = 'http://173.212.251.175:8085/api/Bookings';
+  private apiUrl = 'https://localhost:7026/api/Bookings';
 
   constructor(private http: HttpClient,private authService: AuthService) {}
 

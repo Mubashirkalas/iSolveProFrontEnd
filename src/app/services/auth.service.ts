@@ -9,8 +9,8 @@ import { tap } from 'rxjs';
 })
 export class AuthService {
 
-  private apiUrl ='http://173.212.251.175:8085/api/BusinessPartner/login';
-  private updatePasswordUrl = 'http://173.212.251.175:8085/api/BusinessPartner/update-password';
+  private apiUrl ='https://localhost:7026/api/BusinessPartner/login';
+  private updatePasswordUrl = 'https://localhost:7026/api/BusinessPartner/update-password';
   
   constructor(private http: HttpClient) { }
 
@@ -23,10 +23,15 @@ login(userId: string, password: string): Observable<any> {
   const loginData = { userId, password };
   return this.http.post<any>(this.apiUrl, loginData).pipe(
     tap(response => {
+
+      
       if (response && response.Token) {
-        localStorage.setItem('token', response.Token);  // Save the JWT token
-        localStorage.setItem('userId', response.UserId);  // Save user ID
-        localStorage.setItem('userName', response.BusinessPartnerName); // Save user name
+
+        
+        localStorage.setItem('token', response.token);  // Save the JWT token
+        localStorage.setItem('userId', response.userId);  // Save user ID
+        localStorage.setItem('userName', response.businessPartnerName); // Save user name
+        localStorage.setItem('role', response.partyType); // Changed from partytype to partyType
       }
     })
   );
@@ -35,10 +40,15 @@ login(userId: string, password: string): Observable<any> {
 logout(): void {
   localStorage.removeItem('token');  // Clear token on logout
   localStorage.removeItem('userId');
+  localStorage.removeItem('role');
 }
 
 getUserName(): string | null {
   return localStorage.getItem('userName');  // Retrieve the user's name
+}
+
+getpartyType(): string | null {
+  return localStorage.getItem('role')
 }
 
 getUserId(): string | null {

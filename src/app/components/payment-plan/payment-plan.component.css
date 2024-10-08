@@ -1,88 +1,114 @@
 .payment-plan-container {
   padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-.table {
+
+
+.payment-plan-box {
+  padding: 20px;
+  background-color: white; /* White background for both tables */
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Soft shadow for clearer printing */
+}
+
+.table, .payment-table {
   width: 100%;
   border-collapse: collapse;
+  margin-bottom: 20px;
+  background-color: white; /* White background for clear printing */
 }
 
-.table th, .table td {
+.table th, .table td, .payment-table td, .payment-table th {
   border: 1px solid #ddd;
-  padding: 8px;
+  padding: 10px;
+  text-align: center; /* Center text in both tables */
+  font-size: 16px; /* Consistent font size */
 }
 
-.table th {
-  background-color: #f2f2f2;
+.upper-table td, .payment-table td, .payment-table th {
+  text-align: center; /* Ensure all text is centered */
 }
 
-button {
-  margin-top: 20px;
+.payment-plan-title, .project-name h1 {
+  text-align: center;
 }
 
-/* Responsive for small screens */
-@media (max-width: 576px) {
-  .table {
-    display: block;
-    overflow-x: auto;
-  }
+.payment-plan-title {
+  font-size: 22px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  position: relative;
 }
 
-.payment-plan-image {
-  max-width: 100%; /* Ensure it fits within the container */
-  height: auto; /* Maintain aspect ratio */
-  margin-top: 20px; /* Space above the image */
+.payment-plan-title:after {
+  content: '';
+  display: block;
+  margin: 8px auto 0;
+  width: 100%;
+  height: 2px;
+  background-color: red;
+}
+
+.project-name h1 {
+  font-size: 36px;
+  color: #003a6b;
+  margin-bottom: 5px;
+}
+
+.project-name span {
+  font-size: 16px;
+  color: #d91d26;
+}
+
+.footer-note {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.footer-note b {
+  font-weight: bold;
 }
 
 @media print {
- body {
-      margin: 0;
-      padding: 0;
-      width: 210mm; /* A4 Width */
-      height: auto; /* Adjust based on content */
+  body {
+    margin: 0;
+    padding: 0;
+    width: 210mm;
+    height: auto;
   }
 
-  
-
   .payment-plan-container {
-      padding: 20px; /* Ensure spacing is included */
-      width: 100%; /* Ensure it uses full width */
+    padding: 20px;
+    width: 100%;
+   
   }
 
   h2, h4 {
-      page-break-after: avoid; /* Prevent heading from causing page breaks */
+    page-break-after: avoid;
   }
 
-  .table {
-      width: 100%;
-      border-collapse: collapse; /* Ensure no gaps */
-      page-break-inside: auto; /* Allow table to break if necessary */
+  .table, .payment-table {
+    page-break-inside: auto;
   }
 
-  .table th, .table td {
-      border: 1px solid #ddd;
-      padding: 8px; /* Standard padding */
-      page-break-inside: avoid; /* Prevent breaking table cells */
+  .table th, .table td, .payment-table td, .payment-table th {
+    page-break-inside: avoid;
   }
 
   img {
-      width: 794px; /* Width for A4 */
-      height: auto; /* Maintain aspect ratio */
-      max-width: 100%; /* Responsive */
-      display: block; /* Avoid inline spacing issues */
-      margin: 20px auto; /* Center the image with space */
-      page-break-inside: avoid; /* Prevent image from breaking */
+    width: 794px;
+    height: auto;
+    max-width: 100%;
+    display: block;
+    margin: 20px auto;
+    page-break-inside: avoid;
   }
 
-  /* Hide non-essential elements during printing */
-  .print-button {
-      display: none; /* Hide print button */
-  }
-
-  /* Hide alerts and loading spinners if they exist */
-  .alert,
-  .spinner-border {
-      display: none; /* Hide non-essential elements */
+  .print-button, .check-button, .alert, .spinner-border {
+    display: none;
   }
 }
-

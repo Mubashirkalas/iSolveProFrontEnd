@@ -19,6 +19,10 @@ export class PaymentPlanComponent implements OnInit{
   isLoading: boolean = true;
   hasError: boolean = false;
   imageSrc?: string;
+  includeFloorPlan: boolean = true;
+  installmentDates: Date[] = [];
+  startDate: Date = new Date('2024-10-05');
+
   
   
 
@@ -31,6 +35,7 @@ export class PaymentPlanComponent implements OnInit{
     this.sNo = details.sNo;
     this.srno = details.srno;
     this.financialYear = details.financialYear;
+    
 
     // Validate and proceed to fetch installment plans
     if (this.serialNo) {
@@ -40,7 +45,10 @@ export class PaymentPlanComponent implements OnInit{
       this.isLoading = false;
       this.hasError = true;
     }
+
+    
   }
+
 
 
   displayImage(srno: string, sNo: number, financialYear: string): void {
@@ -66,6 +74,7 @@ export class PaymentPlanComponent implements OnInit{
         (data) => {
           this.installmentPlans = data;
           this.isLoading = false;
+          this.generateInstallmentDates();
         },
         (error) => {
           console.error('Error fetching installment plans:', error);
@@ -75,8 +84,60 @@ export class PaymentPlanComponent implements OnInit{
       );
     }
   }
-  printPage() {
-    window.print();
+
+
+  generateInstallmentDates(): void {
+    const numberOfInstallments = this.installmentPlans.length;
+    let currentDate = new Date(this.startDate);
+
+    for (let i = 0; i < numberOfInstallments; i++) {
+      this.installmentDates.push(new Date(currentDate)); // Push the current date to the array
+      currentDate.setMonth(currentDate.getMonth() + 1); // Increment the month
+    }
   }
+
+
+  printPage() {
+    // Temporarily hide the floor plan image if the user doesn't want it in the print version
+    const floorPlanElement = document.querySelector('.payment-plan-image') as HTMLElement;
+    if (floorPlanElement && !this.includeFloorPlan) {
+      floorPlanElement.style.display = 'none';
+    }
+
+    // Trigger print
+    window.print();
+
+    // Restore the floor plan visibility after print if it was hidden
+    if (floorPlanElement && !this.includeFloorPlan) {
+      floorPlanElement.style.display = 'block';
+    }
+  }
+
+//   getTotalPercentage(): number {
+//     let totalDue = 0;
+//     let totalAmount = 0;
+
+//     this.installmentPlans.forEach(plan => {
+//         totalDue += Number(plan.due) || 0; // Convert to number, default to 0 if NaN
+//         totalAmount += Number(plan.amount) || 0; // Convert to number, default to 0 if NaN
+//     });
+
+//     return totalAmount > 0 ? (totalDue / totalAmount) * 100 : 0;
+// }
+getTotalPercentage(): number {
+  return 100; // Default to 100%
+}
+
+getTotalAmount(): number {
+    return this.installmentPlans.reduce((total, plan) => total + (Number(plan.amount) || 0), 0);
+}
+
+formatDuePercentage(due: string): string {
+  // Remove the '%' sign and parse the number
+  const percentage = parseFloat(due.replace('%', ''));
+  
+  // Format it to one decimal place and return it with '%' sign
+  return percentage.toFixed(1) + '%';
+}
   
 }

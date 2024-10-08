@@ -13,6 +13,7 @@ export class LoginComponent {
   password: string = '';
   errorMessage: string = '';
 
+
 constructor(private authService: AuthService, private router: Router){}
 
 
@@ -26,6 +27,9 @@ login() {
        if (response && response.token && response.userId) {
         localStorage.setItem('token', response.token);  // Save token in localStorage
         localStorage.setItem('userId', response.userId);
+        localStorage.setItem('userName', response.businessPartnerName); // Save user name
+          localStorage.setItem('role', response.partyType); // Save party type
+          
         this.router.navigateByUrl('/dashboard').then(() => {
           window.location.reload();  // Reload after navigating to the target route
         });

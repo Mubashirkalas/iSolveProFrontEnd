@@ -30,7 +30,7 @@
     </div>
 
      <!-- Upload Form -->
-     <form (ngSubmit)="uploadFiles()">
+     <form *ngIf="isSuperAdmin" (ngSubmit)="uploadFiles()">
       <div>
         <label for="eBrochureFile">E-Brochure (PDF):</label>
         <input type="file" id="eBrochureFile" (change)="onFileChange($event, 'eBrochure')" accept=".pdf" required>

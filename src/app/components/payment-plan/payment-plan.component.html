@@ -1,6 +1,6 @@
 <!-- Payment Plan Container -->
 <div class="container-fluid payment-plan-container">
-  <h2 class="text-center">Payment Plan </h2>
+  <!-- <h2 class="text-center"> {{ installmentPlans[0]?.projectName }} Payment Plan </h2> -->
 
   <!-- Loading Spinner -->
   <div *ngIf="isLoading" class="text-center">
@@ -14,39 +14,112 @@
       Error loading installment plans. Please try again later.
   </div>
 
+
+  <!-- Upper Table (Payment Plan Details) -->
+  <div *ngIf="!isLoading && !hasError && installmentPlans.length > 0"  class="payment-plan-box">
+    <h2 class="payment-plan-title">PAYMENT PLAN</h2>
+    
+    <div class="project-name">
+        <h1> {{ installmentPlans[0]?.projectName }}</h1>
+       
+    </div>
+    
+    <table  class="payment-table upper-table ">
+        <tr >
+            <td>Block </td>
+            <td>{{ installmentPlans[0]?.blockName }}</td>
+        </tr>
+        <tr>
+            <td>Unit Description</td>
+            <td>{{ installmentPlans[0]?.propertyDescription }}</td>
+        </tr>
+        <tr>
+            <td>Property Type</td>
+            <td>{{ installmentPlans[0]?.propertyDetailsTitle }}</td>
+        </tr>
+        <!-- <tr>
+            <td>Apartment Layout</td>
+            <td>2 BHK Type - A</td>
+        </tr> -->
+        <tr>
+            <td>Area (in Sq.Ft)</td>
+            <td>{{ installmentPlans[0]?.areaName }}</td>
+        </tr>
+        <!-- <tr>
+            <td>View</td>
+            <td>Skyscrapers View and Community View</td>
+        </tr> -->
+        <tr>
+            <td>Total Price</td>
+            <td>PKR {{ installmentPlans[0]?.salesPrice }}</td>
+        </tr>
+        <tr>
+            <td>Status</td>
+            <td>{{ installmentPlans[0]?.status }}</td>
+        </tr>
+    </table>
+
+    <!-- <div class="footer-note">
+        *Registration through Cheque in the Name of: <b>Your Company Name</b>
+    </div> -->
+ 
+
+
   <!-- Installment Plans Table -->
-  <table *ngIf="!isLoading && !hasError && installmentPlans.length > 0" class="table table-bordered">
+  <table  class="payment-table">
       <thead>
           <tr>
-              <th>Serial No</th>
-              <th>Plan Name</th>
-              <th>Project Name</th>
-              <th>Description</th>
-              <th>Amount</th>
+              <th>Instl#</th>
+             <th>Date</th>
+             
+              <th>Percentage</th>
+              <th>Amount </th>
           </tr>
       </thead>
       <tbody>
-          <tr *ngFor="let plan of installmentPlans">
-              <td>{{ plan.serialNo }}</td>
-              <td>{{ plan.planName }}</td>
-              <td>{{ plan.projectName }}</td>
-              <td>{{ plan.description }}</td>
-              <td>{{ plan.amount | number:'1.0-2' }}</td>
+          <tr *ngFor="let plan of installmentPlans; let i= index">
+              <td>{{ plan.sNo }}</td>
+              <td>{{ installmentDates[i] | date: 'dd-MMM-yyyy' }}</td>
+              <td>{{ formatDuePercentage(plan.due)  }}</td>
+              <td>{{ plan.amount | number:'1.0-0' }} PKR </td>
           </tr>
       </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="2"><strong>Grand Total</strong></td>
+          <td><strong>{{ getTotalPercentage()  }}%</strong></td>
+          <td><strong>{{ getTotalAmount() | number:'1.0-0' }} PKR</strong></td>
+        </tr>
+    </tfoot>
   </table>
+</div>
+
+  
+       <!-- Checkbox to include/exclude floor plan in print -->
+       <div class="form-check mb-3 check-button"  >
+        <input class="form-check-input" type="checkbox" id="includeFloorPlan" [(ngModel)]="includeFloorPlan">
+        <label class="form-check-label" for="includeFloorPlan">
+          Include Floor Plan Image in Print
+        </label>
+      </div>
 
   <!-- Floor Plan Image Section -->
+   <div  *ngIf="includeFloorPlan">
   <div *ngIf="installmentPlans.length > 0" class="text-center">
       <h4 class="text-center">Floor Plan Image</h4>
-      <ng-container *ngIf="installmentPlans[0].fileUpload; else noImage">
-          <img [src]="'http://173.212.251.175:8085/' + installmentPlans[0].fileUpload" alt="Installment Plan Image" class="payment-plan-image" />
-      </ng-container>
-      <ng-template #noImage>
-          <p>No floor plan image available</p>
-      </ng-template>
-  </div>
+ 
 
+     <!-- Conditional display of floor plan section -->
+  <div>
+    <ng-container *ngIf="installmentPlans[0].fileUpload; else noImage">
+      <img [src]="'http://173.212.251.175:8085/' + installmentPlans[0].fileUpload" alt="Installment Plan Image" class="payment-plan-image" />
+    </ng-container>
+    <ng-template #noImage>
+      <p>No floor plan image available</p>
+    </ng-template>
+  </div>
+  </div>
+</div>
   <!-- Print Button (not printed) -->
   <div class="text-center mt-4 print-button">
       <button class="btn btn-success" (click)="printPage()">Print</button>

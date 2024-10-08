@@ -8,7 +8,7 @@ import { EventReport } from '../models/model-event-report';
 })
 export class EventReportService {
 
-  private apiUrl = 'http://173.212.251.175:8085/api/EventReport';
+  private apiUrl = 'https://localhost:7026/api/EventReport';
 
   constructor(private http: HttpClient) {}
 

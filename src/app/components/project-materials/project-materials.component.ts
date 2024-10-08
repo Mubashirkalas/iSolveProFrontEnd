@@ -4,6 +4,7 @@ import { ProjectmaterialService } from '../../services/project.service';
 import { Project } from '../../models/model-projects';
 import { MarketingMaterial } from '../../models/model-marketing-material';
 import { MarketingMMaterial } from '../../models/model-marketing-material';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
@@ -14,6 +15,7 @@ import { MarketingMMaterial } from '../../models/model-marketing-material';
 export class ProjectMaterialsComponent implements OnInit{
 
   selectedProject: Project | null = null;
+  isSuperAdmin: boolean = false;
   marketingMaterials: MarketingMaterial = {
     serialNo: 0, // Initialize with a default value
     eBrochure: null,
@@ -31,9 +33,15 @@ export class ProjectMaterialsComponent implements OnInit{
 
 
 
-  constructor(private projectMaterialService: ProjectmaterialService, private projectService:ProjectService) {}
+  constructor(private projectMaterialService: ProjectmaterialService, 
+    private projectService:ProjectService, 
+    private authService: AuthService) {}
 
   ngOnInit(): void {
+
+    const role = this.authService.getpartyType();
+    this.isSuperAdmin = role === 'Super Admin';
+
     this.projectService.selectedProject$.subscribe(project => {
       this.selectedProject = project;
       if (project) {
@@ -99,6 +107,6 @@ export class ProjectMaterialsComponent implements OnInit{
   }
 
   getFullFilePath(filePath: string): string {
-    return `http://173.212.251.175:8085/${filePath}`;
+    return `https://localhost:7026/${filePath}`;
   }
 }
